@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 Hi, I am Valentin Mihov, a developer based in Sofia, Bulgaria. 
-Graduated Computer Science from the Sofia University. I got a silver medal from the (International Olympiad in Informatics)[http://www.ioinformatics.org/index.shtml] and a gold medal from the Balkan Olympiad in Informatics.
+Graduated Computer Science from the Sofia University. I got a silver medal from the [International Olympiad in Informatics](http://www.ioinformatics.org/index.shtml) and a gold medal from the Balkan Olympiad in Informatics.
 
 I am currently working as an independent consultant and I am good at Ruby on Rails, databases, scalability and machine learning.
 
