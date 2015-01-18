@@ -48,7 +48,7 @@ The standard way to hook up EmberJS with a Rails app is to use the active_record
 
 As you see the nested resources are specified with their ids and then are serialized at the top level of the JSON. Unfortunately this does not work with ActiveResource or Her if you want to consume this from another Rails app.
 
-This is done with the following serializers:
+The above output is done with the following serializers:
 
 {% highlight ruby %}
 class ProjectSerializer < ActiveModel::Serializer
