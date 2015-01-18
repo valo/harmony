@@ -14,7 +14,7 @@ tags:
    - rails api
    - api
 ---
-Recently I got into a situation at work, where there was a Rails app, which was exposing some data through an API which uses [active_record_serializers](https://github.com/rails-api/active_model_serializers) and [EmberJS](http://emberjs.com/) as front-end of the data. The problem was there needed to be a new Rails app, which also consumes data from the same Rails API endpoints and visualize the data. Unfortunatelly ActiveRecord and [Her](https://github.com/remiprev/her) are not supporting the ember-data kind of data format, which requires to have separate serializers for EmberJS and for regular Rails API calls. So the [ember_data_active_model_parser](https://github.com/valo/ember_data_active_model_parser) was born, which is a middleware for Her, which makes it understand the ember-data JSON format.
+Recently I got into a situation at work, where there was a Rails app, which was exposing some data through an API which uses [active_record_serializers](https://github.com/rails-api/active_model_serializers) and [EmberJS](http://emberjs.com/) as front-end of the data. The problem was there needed to be a new Rails app, which also consumes data from the same Rails API endpoints and visualize the data. Unfortunatelly [ActiveResource](https://github.com/rails/activeresource) and [Her](https://github.com/remiprev/her) are not supporting the ember-data kind of data format, which requires to have separate serializers for EmberJS and for regular Rails API calls. So the [ember_data_active_model_parser](https://github.com/valo/ember_data_active_model_parser) was born, which is a middleware for Her, which makes it understand the ember-data JSON format.
 
 ## Using EmberJS with Rails
 
