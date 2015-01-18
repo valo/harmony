@@ -121,4 +121,11 @@ Project.find(1).tasks
 # => [#<Task(tasks/2) name="Water" completed=true id=2 project=#<Project(projects/1) name="Shop list" ...>>, #<Task(tasks/8) name="Bread" completed=false id=8 project=#<Project(projects/1) name="Shop list" ...>>]
 {% endhighlight %}
 
+## Example projects
+
+You can checkout the example projects I setup:
+
+* Rails app with EmberJS front-end: [ember_rails_api_example](https://github.com/valo/ember_rails_api_example)
+* Rails app which uses Her to consume the data from the first app: [ember_rails_api_consumer](https://github.com/valo/ember_rails_api_consumer)
+
 This is the first version of the parser, so there is a lot of room for improvement. If you find it useful, please open an issue with any suggestions or bugs you find!
