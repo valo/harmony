@@ -3,6 +3,7 @@ layout: post
 title: "Rails + EmberJS + Active Model Serializers + Her"
 date: 2015-01-17 20:20:14 +0200
 comments: true
+description: How to hookup EmberJS and Her ORM to a common Rails API endpoints
 tags:
    - rails
    - emberjs
