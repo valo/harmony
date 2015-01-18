@@ -68,7 +68,7 @@ end
 
 ## Consuming using Her and a custom parser
 
-At this point everything works great, but what about if you want to consume the above REST API from another Rails app? There are several options for an ORM here like [ActiveResource](https://github.com/rails/activeresource) and [Her](https://github.com/remiprev/her), but they both doesn't understand the above format. Here is what you get using the default Her parsers with the active_model_serializers format:
+At this point everything works great, but what about if you want to consume the above REST API from another Rails app? There are several options for an ORM here like [ActiveResource](https://github.com/rails/activeresource) and [Her](https://github.com/remiprev/her), but they both don't understand the above format. Here is what you get using the default Her parsers with the active_model_serializers format:
 
 {% highlight ruby %}
 Her::API.setup url: "http://localhost:3000" do |c|
