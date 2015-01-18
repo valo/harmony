@@ -750,3 +750,34 @@ tbody tr:nth-child(odd) td,
 tbody tr:nth-child(odd) th {
   background-color: $base-05;
 }
+
+/* -----------------------------------
+
+  Buttons
+
+----------------------------------- */
+button {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  border: solid $base-04 2px;
+  text-decoration: none;
+  background: white;
+  color: $base-08;
+  font-family: $primary-font;
+}
+
+button:hover {
+  background: $base-04;
+  text-decoration: none;
+}
+
+.comments {
+  text-align: center;
+
+  .show-comments {
+    margin: auto;
+  }
+}

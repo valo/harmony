@@ -49,7 +49,7 @@ configured in `_config.yml` file under root of the harmony directory.
 Feel free to change your `name`, `descriptionn`, `meta_description`, `author details`,
 `social media names` and `Google analytics id` accordingly. 
 
-``` yml
+{% highlight yml %}
 # Harmony theme configuration. Please change accordingly.
 harmony:
   name: Harmony
@@ -75,7 +75,7 @@ harmony:
     pinterest: 
   # Toggle disclaimer in footer
   show_disclaimer: true
-```
+{% endhighlight %}
 
 ### Includes 
 

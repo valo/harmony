@@ -18,9 +18,12 @@ layout: default
 		</p>		
 		<div class="post">
 			{{ content }}
+
+			<div class="comments">
+				{% include disqus.html %}				
+			</div>
 		</div>
 	</div>
-
 
 	{% if site.related_posts %}
 	<div class="related">

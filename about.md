@@ -4,24 +4,17 @@ title: About me
 permalink: /about/
 ---
 
-Hi, I am Gayan Virajith, a developer (who works on the web) based on Sri Lanka. 
-Graduated from the University College Dublin (National University of Ireland). 
+Hi, I am Valentin Mihov, a developer based in Sofia, Bulgaria. 
+Graduated Computer Science from the Sofia University. I got a silver medal from the (International Olympiad in Informatics)[http://www.ioinformatics.org/index.shtml] and a gold medal from the Balkan Olympiad in Informatics.
 
-I am Working for [template-factory.nl][tf] also known as [Mearch ICT][m].
-Prefer to serve with Php and Ruby based stacks and also love to work 
-on [Jekyll][jekyll] and [Processwire CMS/CMF][pw].
+I am currently working as an independent consultant and I am good at Ruby on Rails, databases, scalability and machine learning.
 
 ### Contact me
 
-Find me on [Google+][google] / [Github][github] / [Twitter][Twitter] or just say `Hello` at 
-[gayanvirajith@gmail.com](gayanvirajith@gmail.com).
+Find me on [Google+][google] / [Github][github] / [Twitter][twitter] or just say `Hello` at 
+[valentinmihov@gmail.com](valentinmihov@gmail.com).
 
 
-[tf]: http://template-factory.nl
-[m]: http://mearch.com
-[pw]: http://processwire.com
-[pwf]: http://processwire.com/talk
-[jekyll]: http://jekyllrb.com
-[github]: https://github.com/gayanvirajith
-[google]: https://plus.google.com/+GayanVirajith
-[twitter]: https://twitter.com/gayanvirajith
+[github]: https://github.com/valo
+[google]: https://plus.google.com/+ValentinMihov
+[twitter]: https://twitter.com/valentinmihov
