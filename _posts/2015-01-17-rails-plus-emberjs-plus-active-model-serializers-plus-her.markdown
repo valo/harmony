@@ -18,7 +18,7 @@ Recently I got into a situation at work, where there was a Rails app, which was 
 
 ## Using EmberJS with Rails
 
-The standard way to hook up EmberJS with a Rails app is to use the active_record_serializers and the [DS.ActiveModelAdapter](http://emberjs.com/api/data/classes/DS.ActiveModelAdapter.html. This causes the JSON responses to look like this (GET /project/1):
+The standard way to hook up EmberJS with a Rails app is to use the active_record_serializers and the [DS.ActiveModelAdapter](http://emberjs.com/api/data/classes/DS.ActiveModelAdapter.html). This causes the JSON responses to look like this (GET /project/1):
 
 {% highlight javascript %}
 // GET /projects/1
