@@ -12,7 +12,7 @@ I am currently working as an independent consultant and I am good at Ruby on Rai
 ### Contact me
 
 Find me on [Google+][google] / [Github][github] / [Twitter][twitter] or just say `Hello` at
-[valentin.mihov@gmail.com](valentin.mihov@gmail.com).
+[valentin.mihov@gmail.com](mailto:valentin.mihov@gmail.com).
 
 
 [github]: https://github.com/valo
