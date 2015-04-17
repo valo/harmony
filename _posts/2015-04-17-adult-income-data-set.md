@@ -40,9 +40,9 @@ before/after the commans and mark the values '?' as missing data points.
 original_data = pd.read_csv(
     "adult.data.txt",
     names=[
-        "Age", "Workclass", "fnlwgt", "Education", "Education-Num", "Martial Status", "Occupation",
-        "Relationship", "Race", "Sex", "Capital Gain", "Capital Loss", "Hours per week", "Country",
-        "Target"],
+        "Age", "Workclass", "fnlwgt", "Education", "Education-Num", "Martial Status",
+        "Occupation", "Relationship", "Race", "Sex", "Capital Gain", "Capital Loss",
+        "Hours per week", "Country", "Target"],
         sep=r'\s*,\s*',
         engine='python',
         na_values="?")
@@ -553,7 +553,7 @@ coefs.plot(kind="bar")
 plt.show()
 {% endhighlight %}
 
-    F1 score: 0.553203
+    F1 score: 0.573306
 
 
 
@@ -634,7 +634,7 @@ coefs.plot(kind="bar")
 plt.show()
 {% endhighlight %}
 
-    F1 score: 0.668999
+    F1 score: 0.651455
 
 
 
@@ -648,7 +648,7 @@ dummy variables. Also it seems that we managed to uncover some interesting
 insign from our model. It seems that the features that impacts the income of a
 person positevely are `Capital Gain`, `Married-civ-spounce`, `Age`, `Hours per
 week` and `Exec-managerial`. The features that impact it most negateively are
-`Never married`, `Own child`, `Priv-house-serv`, `Dovorsed` and unfortunately
+`Never married`, `Own child`, `Priv-house-serv`, `Divorsed` and unfortunately
 `Female`. One more proof that there is a gender inequality in our society.
 
 As you can see we not only managed to build a machine learning model that we can
