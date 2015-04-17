@@ -9,7 +9,7 @@ In this blog post I will show you how to slice'n dice the data set from [Adult
 Data Set MLR](https://archive.ics.uci.edu/ml/datasets/Adult) which contains
 income data for about 32000 people. We will look at the data and build a machine
 learning model, which tries to predict if a person will make more than $50K a
-year.
+year, given data like education, gender and martial status.
 
 Let's first import some libraries that we are going to need for our analysis
 
@@ -37,7 +37,15 @@ before/after the commans and mark the values '?' as missing data points.
 **In [2]:**
 
 {% highlight python %}
-original_data = pd.read_csv("adult.data.txt", names=["Age", "Workclass", "fnlwgt", "Education", "Education-Num", "Martial Status", "Occupation", "Relationship", "Race", "Sex", "Capital Gain", "Capital Loss", "Hours per week", "Country", "Target"], sep=r'\s*,\s*',engine='python', na_values="?")
+original_data = pd.read_csv(
+    "adult.data.txt",
+    names=[
+        "Age", "Workclass", "fnlwgt", "Education", "Education-Num", "Martial Status", "Occupation",
+        "Relationship", "Race", "Sex", "Capital Gain", "Capital Loss", "Hours per week", "Country",
+        "Target"],
+        sep=r'\s*,\s*',
+        engine='python',
+        na_values="?")
 original_data.tail()
 {% endhighlight %}
 
@@ -518,10 +526,9 @@ scale the features and look at them again.
 {% highlight python %}
 X_train, X_test, y_train, y_test = cross_validation.train_test_split(encoded_data[encoded_data.columns - ["Target"]], encoded_data["Target"], train_size=0.70)
 scaler = preprocessing.StandardScaler()
-X_train = pd.DataFrame(scaler.fit_transform(X_train), columns=X_train.columns)
-X_test = scaler.transform(X_test)
+X_train = pd.DataFrame(scaler.fit_transform(X_train.astype("f64")), columns=X_train.columns)
+X_test = scaler.transform(X_test.astype("f64"))
 {% endhighlight %}
-
 
 ### Logistic regression
 
@@ -546,7 +553,7 @@ coefs.plot(kind="bar")
 plt.show()
 {% endhighlight %}
 
-    F1 score: 0.557426
+    F1 score: 0.553203
 
 
 
@@ -627,7 +634,7 @@ coefs.plot(kind="bar")
 plt.show()
 {% endhighlight %}
 
-    F1 score: 0.668373
+    F1 score: 0.668999
 
 
 
