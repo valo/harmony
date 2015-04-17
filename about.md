@@ -11,10 +11,11 @@ I am currently working as an independent consultant and I am good at Ruby on Rai
 
 ### Contact me
 
-Find me on [Google+][google] / [Github][github] / [Twitter][twitter] or just say `Hello` at
+Find me on [Google+][google] / [Github][github] / [Twitter][twitter] / [LinkedIn][linkedin] or just say `Hello` at
 [valentin.mihov@gmail.com](mailto:valentin.mihov@gmail.com).
 
 
 [github]: https://github.com/valo
 [google]: https://plus.google.com/+ValentinMihov
 [twitter]: https://twitter.com/valentinmihov
+[linkedin]: https://bg.linkedin.com/in/valentinmihov
