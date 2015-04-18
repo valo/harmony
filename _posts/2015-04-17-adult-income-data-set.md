@@ -1,9 +1,16 @@
 ---
 layout: post
-title: "Adult Income Data Set Anaysis"
+title: "Adult Income Data Set Anaysis with IPython"
+date: 2015-04-17 20:20:14 +0200
+comments: true
+description: An example workflow for analyzing a data set with ipython and building a logistic regression model over it
 tags:
     - python
     - notebook
+    - machine learning
+    - logistic regression
+    - matplotlib
+    - data analysis
 ---
 In this blog post I will show you how to slice'n dice the data set from [Adult
 Data Set MLR](https://archive.ics.uci.edu/ml/datasets/Adult) which contains
