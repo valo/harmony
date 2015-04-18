@@ -567,7 +567,7 @@ plt.show()
 ![png](/notebooks/adult_income_data_set_files/adult_income_data_set_25_1.png)
 
 
-As you can see we managed to achieve F1 score of 0.55 and the features that
+As you can see we managed to achieve F1 score of 0.57 and the features that
 seems to contribute most positevely to have an income of more than $50K are
 `Capital Gain`, `Education-Num` and `Sex`, while the features that contribute
 most negatively are `Martia Status` and `Relationship`. There is a problem here,
