@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Adult Income Data Set Anaysis with IPython"
+title: "Adult Income Data Set Analysis with IPython"
 date: 2015-04-17 20:20:14 +0200
 comments: true
 description: An example workflow for analyzing a data set with ipython and building a logistic regression model over it
@@ -12,10 +12,11 @@ tags:
     - matplotlib
     - data analysis
 ---
-In this blog post I will show you how to slice'n dice the data set from [Adult
+In this blog post I will show you how to slice-n-dice the data set from [Adult
 Data Set MLR](https://archive.ics.uci.edu/ml/datasets/Adult) which contains
 income data for about 32000 people. We will look at the data and build a machine
-learning model, which tries to predict if a person will make more than $50K a
+learning model (a [logistic regression](http://en.wikipedia.org/wiki/Logistic_regression)),
+which tries to predict if a person will make more than $50K a
 year, given data like education, gender and martial status.
 
 Let's first import some libraries that we are going to need for our analysis
@@ -37,7 +38,7 @@ import seaborn as sns
 
 First we need to read the data from the file, which contains comma separated
 columns. With the command below we will read the data skipping any spaces
-before/after the commans and mark the values '?' as missing data points.
+before/after the commas and mark the values '?' as missing data points.
 
 ## Load the data
 
@@ -568,12 +569,12 @@ plt.show()
 
 
 As you can see we managed to achieve F1 score of 0.57 and the features that
-seems to contribute most positevely to have an income of more than $50K are
+seems to contribute most positively to have an income of more than $50K are
 `Capital Gain`, `Education-Num` and `Sex`, while the features that contribute
 most negatively are `Martia Status` and `Relationship`. There is a problem here,
 though. Features like `Martial Status` have values ranging from 0 to 6 and the
 order is really important here. In practice there is no particular order in that
-feature (unline `Education-Num` for which the higher the number, the better the
+feature (unlike `Education-Num` for which the higher the number, the better the
 education). We can fix this using *binary features*.
 
 ### Classify using binary features
@@ -650,17 +651,17 @@ plt.show()
 
 # Summary
 
-We managed to improve the F1 score significantly by converting the data to use
+We managed to improve the [F1 score](http://en.wikipedia.org/wiki/F1_score) significantly by converting the data to use
 dummy variables. Also it seems that we managed to uncover some interesting
-insign from our model. It seems that the features that impacts the income of a
-person positevely are `Capital Gain`, `Married-civ-spounce`, `Age`, `Hours per
-week` and `Exec-managerial`. The features that impact it most negateively are
+insight from our model. It seems that the features that impacts the income of a
+person positively are `Capital Gain`, `Married-civ-spounce`, `Age`, `Hours per
+week` and `Exec-managerial`. The features that impact it most negatively are
 `Never married`, `Own child`, `Priv-house-serv`, `Divorsed` and unfortunately
 `Female`. One more proof that there is a gender inequality in our society.
 
 As you can see we not only managed to build a machine learning model that we can
 use to classify new data, but we also managed to uncover some interesting
-insigns from our data. This is one of the nice features of the linear models.
+insight from our data. This is one of the nice features of the linear models.
 They are not "black boxes", like neural networks for example and allow to see
 what exactly the model is doing.
 
