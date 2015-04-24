@@ -618,7 +618,7 @@ X_train = pd.DataFrame(scaler.fit_transform(X_train), columns=X_train.columns)
 X_test = scaler.transform(X_test)
 {% endhighlight %}
 
-### Logistic Regression
+### Logistic Regression with dummy variables
 
 **In [14]:**
 
