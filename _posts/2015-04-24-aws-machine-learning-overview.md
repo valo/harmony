@@ -9,18 +9,17 @@ In the last blog post I showed you how to [slice and dice a data
 set](http://www.valentinmihov.com/2015/04/17/adult-income-data-set/) describing
 individual people and trying to predict if they make more than $50,000 annually.
 We used [ipython](http://ipython.org/) and a bunch of libraries to do the
-analysis, build a prediction model and evaluate its performance against the
-data. This requires having knowledge about how to use all these python libraries
-and what exactly to do with the data (although you can use the ipython notebook
-from that blog post as a general framework to analyze any data set). It also
-requires installing all these libraries on your system, which can be non-
-trivial.
+analysis, build a prediction model and evaluate its performance. This requires
+having knowledge about how to use all these python libraries and what exactly to
+do with the data (although you can use the ipython notebook from that blog post
+as a general framework to analyze any data set). It also requires installing all
+this software on your system, which can be non-trivial.
 
 Recently Amazon released a new AWS service called [Machine
 Learning](http://aws.amazon.com/machine-learning/). It provides a simplified and
 easily scalable way to build machine learning models over arbitrary data sets.
 In this blog post I will make an overview of this service and compare its
-results with the ones we obtained using ipython on the same dataset we used the
+results with the ones we obtained using ipython on the same data set we used the
 last time.
 
 ## Import the data set into AWS
@@ -46,7 +45,7 @@ Image("aws_target_stats.png")
 
 
 It also allows you to view the distribution of the values for the numerical and
-categorical variables. It is very similar to what we did [last
+categorical features. It is very similar to what we did [last
 time](http://www.valentinmihov.com/2015/04/17/adult-income-data-set/#analyze-
 the-data).
 
@@ -77,19 +76,19 @@ Image("aws_age_stats.png")
 
 
 In the above screenshot you can see that the distribution of the first variable
-in the dataset, which is `Age`, looks very similarly to what we saw in our
-ipython analysis.
+in the data set: `Age`. It is very similar to what we saw in our ipython
+analysis.
 
 ## Building a model
 
 After we looked in the data we can try to build a model, which will predict the
 target value. In this case it is a classification model with 2 possible classes
-(under or equal to \$50k/year and over \$50k/year).
+('under or equal to \$50k/year' and 'over \$50k/year').
 
 After building the model we see that AWS have split our data into two and used
 70% of the data to build a model and remaining 30% to test the model. This is a
-standard approach when building a machine learning model, which prevents extreme
-overfitting of your model.
+standard approach when building a machine learning model and prevents
+overfitting.
 
 We also see that the AWS UI provides a confusion matrix of the model and F1
 scores for each of the classes.
@@ -108,7 +107,7 @@ Image("aws_confusion_matrix.png")
 
 
 As you can see the [F1 score](http://en.wikipedia.org/wiki/F1_score) of the
-positive target, which in this case is `>50K` is 0.69. This is slightly better
+positive target, which in this case is `>50K`, is 0.69. This is slightly better
 than the result we got in our ipython analysis using [dummy
 variables](http://en.wikipedia.org/wiki/Dummy_variable_%28statistics%29) which
 was 0.65. This means that the machine learning model was smart enough to make
@@ -129,13 +128,13 @@ variable transformation. For example if you have a `Gender` feature that gets
 values `Male` and `Female` you will have 2 dummy variables `Gender_Male` and
 `Gender_Female` taking value of 0 or 1. If you have a missing value for some
 instance you should set both variables to 0. For example look how the
-transformation should look like:
+transformation should look like when you have missing data:
 
 **In [5]:**
 
 {% highlight python %}
 import pandas as pd
-pd.get_dummies(['Male', 'Female', np.nan])
+pd.get_dummies(pd.DataFrame(['Male', 'Female', 'Male', 'Male', np.nan], columns=["Gender"]))
 {% endhighlight %}
 
 
@@ -146,8 +145,8 @@ pd.get_dummies(['Male', 'Female', np.nan])
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Female</th>
-      <th>Male</th>
+      <th>Gender_Female</th>
+      <th>Gender_Male</th>
     </tr>
   </thead>
   <tbody>
@@ -164,6 +163,16 @@ pd.get_dummies(['Male', 'Female', np.nan])
     <tr>
       <th>2</th>
       <td> 0</td>
+      <td> 1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td> 0</td>
+      <td> 1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td> 0</td>
       <td> 0</td>
     </tr>
   </tbody>
@@ -171,6 +180,10 @@ pd.get_dummies(['Male', 'Female', np.nan])
 </div>
 
 
+
+I am not sure AWS does this, but given that they don't detect the missing
+values, then they probably interpret the missing values as just one more class
+for that feature, which I believe is not ideal.
 
 ## Conclusion
 
@@ -180,9 +193,9 @@ Regression](http://en.wikipedia.org/wiki/Logistic_regression) model just using
 the web UI. The results were awesome and comparable to the results we got using
 ipython, but with much less effort from our side.
 
-The downside of this product is the lack of machine learning algorithms. For
-example it would have been really awesome to compare the results from the
-logistic regression to a decision tree model, like
+The downside is the lack of options for machine learning algorithms. For example
+it would have been really awesome to compare the results from the logistic
+regression to a decision tree model, like
 [C4.5](http://en.wikipedia.org/wiki/C4.5_algorithm). I am sure this is on the
 TODO list of the team developing this product.
 
@@ -200,7 +213,7 @@ Pros:
 
 * Very easy to use
 * The results are comparable to a logistic regression with ipython, even
-slightly better
+slightly better (using all default settings)
 * Easy data visualization of the distribution of the features
 * Very easy to scale to large amounts of data
 * Easier to integrate with your existing AWS deployments
