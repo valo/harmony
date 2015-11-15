@@ -632,6 +632,11 @@ div.post {
   &:last-child {
     border-bottom: none;
   }
+
+  .center-image {
+    margin: 0 auto;
+    display: block;
+  }
 }
 p.post-meta {
   line-height: 1.6;
