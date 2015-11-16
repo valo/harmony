@@ -1,7 +1,7 @@
 {% comment %} Load script if disquss comments are enabled and `page.comments` is either empty (index) or set to true {% endcomment %}
 {% if site.disqus_short_name and page.comments != false %}
 <button class="show-comments">Load Disqus comments</button>
- 
+
 <div id="disqus_thread"></div>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -9,14 +9,14 @@
 $(document).ready(function() {
     $('.show-comments').on('click', function(){
           var disqus_shortname = '{{ site.disqus_short_name }}'; // Replace this value with *your* username.
- 
-          // ajax request to load the disqus javascript
-          $.ajax({
-                  type: "GET",
-                  url: "http://" + disqus_shortname + ".disqus.com/embed.js",
-                  dataType: "script",
-                  cache: true
-          });
+
+          var d = document, s = d.createElement('script');
+
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+
           // hide the button once comments load
           $(this).fadeOut();
     });
