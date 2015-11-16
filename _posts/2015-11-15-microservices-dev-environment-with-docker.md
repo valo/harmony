@@ -9,8 +9,6 @@ tags:
 image: images/posts/docker-friends.png
 ---
 
-![png](/images/posts/docker-friends.png){: .center-image}
-
 Developing apps as a set of microservices is getting more and more popular in the recent years. Usually teams decide to adopt this approach as a way to decrease the complexity of their projects. I won't go into details if this approach is good or bad, but I'm convinced that it has its place in the arsenal of software practices a good engineer should have.
 
 One of the problems I've seen with this approach is the increased complexity of running the whole system. This is because with each new microservice, the developer usually needs to run a separate database and/or memcache/redis/rabbitmq/nosql storage. As the number of services grow this becomes a bigger problem (usually anything with more than 2 services is getting quite hard to run and configure). This is especially problematic for new team members that need to run the app and play with it as they need to understand the dependencies of each microservice.
