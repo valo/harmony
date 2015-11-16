@@ -6,7 +6,10 @@ tags:
     - docker-compose
     - microservices
     - containers
+image: images/posts/docker-friends.png
 ---
+
+![png](/images/posts/docker-friends.png){: .center-image}
 
 Developing apps as a set of microservices is getting more and more popular in the recent years. Usually teams decide to adopt this approach as a way to decrease the complexity of their projects. I won't go into details if this approach is good or bad, but I'm convinced that it has its place in the arsenal of software practices a good engineer should have.
 
