@@ -49,7 +49,7 @@ Probably you've heard about containers, docker and virtualization. These tools c
 
 ### Prerequisites for OSX
 
-First you need to install `docker` and `docker-compose` first. On OS X I recommend using [homebrew](http://brew.sh/) to install all the require dependencies:
+First you need to install `docker` and `docker-compose`. On OS X I recommend using [homebrew](http://brew.sh/) to install all the require dependencies:
 
 {% highlight bash %}
 $ brew install caskroom/cask/brew-cask
