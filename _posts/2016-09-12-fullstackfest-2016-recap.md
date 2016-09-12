@@ -9,9 +9,7 @@ tags:
 image: images/posts/full-stack-fest.png
 ---
 
-I few days ago I attended the [Full Stack Fest](https://2016.fullstackfest.com/) in Barcelona. It was a great conference and I really enjoyed the way it was organized and the talks that I watched. Great thanks to the organizers [codegram](http://www.codegram.com/) and [AirHelp](https://www.airhelp.com/en/) for sponsoring my attendance.
-
-I tried to keep notes during the conference about interesting ideas and projects, so I tried to compile these notes in a blog post as a recap of what I learned from the conference.
+I few days ago I attended the [Full Stack Fest](https://2016.fullstackfest.com/) in Barcelona. It was a great conference and I really enjoyed the way it was organized and the talks that I watched. Great thanks to the organizers [codegram](http://www.codegram.com/) and [AirHelp](https://www.airhelp.com/en/) for sponsoring my attendance. I tried to keep notes during the conference about interesting ideas and projects, so I tried to compile these notes in a blog post as a recap of what I learned from the conference.
 
 ## Computing: The first 100 years
 
