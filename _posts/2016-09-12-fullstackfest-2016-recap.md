@@ -74,7 +74,7 @@ So here is a talk with quite a bombastic title. It was discussing various aspect
 * [Hyperdrive](https://github.com/mafintosh/hyperdrive) is a peer to peer data distribution protocol
 * [IPFS](https://ipfs.io/) is a peer-to-peer hypermedia protocol, which allows to have a distributed web. Might be the way to handle content efficiently between planets, where each planet will have a local version of the global web, which is synchronized on demand.
 
-## Reactive Reality && Virtual Reality is Here, in your Browser
+## Reactive Reality & Virtual Reality is Here, in your Browser
 
 These were two talks about virtual reality in the web. Looks like an early stage technology with some interesting potential use cases. The projects mentioned:
 
