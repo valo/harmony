@@ -10,7 +10,7 @@ layout: default
 		{% endif %}
 		<h1>{{ page.title }}</h1>
 		<p class="post-meta">
-			{% if (page.categories.size > 0 %}
+			{% if page.categories.size > 0 %}
       <span class="categories">
       {{ page.categories | array_to_sentence_string }}
       </span> |
@@ -67,4 +67,3 @@ layout: default
 		</div>
 	</div>
 </div>
-
