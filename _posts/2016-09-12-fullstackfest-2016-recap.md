@@ -95,8 +95,8 @@ I was totally blown away by this talk from [Scott Jenson](https://twitter.com/sc
 
 There are some technologies I didn't mention above, where were a recurring topic during the conference. These you probably have heard of and it seems they are getting wider adoption:
 
-* ReactJS - most of the front-end talks were somehow connected to React. Even the VR talks were using ReactJS for rendering
-* GraphQL was mentioned a lot. The main reason are the mobile networks and the high latency they have, which makes accessing websites that make many HTTP requests a pain. HTTP/2 is going to fix that for the assets, but for the server side data, GraphQL seems to be the answer
-* Facebook Relay was also mentioned. It is a technology which steps on ReactJS and GraphQL and allows you to describe the data each component needs in isolation. Then the framework assembles the query, which needs to be sent to the server. Still in development, but seems like a nice approach, especially for bigger apps with a lot of components and devs working on them.
+* [ReactJS](https://facebook.github.io/react/) - most of the front-end talks were somehow connected to React. Even the VR talks were using ReactJS for rendering
+* [GraphQL](https://github.com/facebook/graphql) was mentioned a lot. The main reason are the mobile networks and the high latency they have, which makes accessing websites that make many HTTP requests a pain. HTTP/2 is going to fix that for the assets, but for the server side data, GraphQL seems to be the answer
+* [Facebook Relay](https://facebook.github.io/relay/) was also mentioned. It is a technology which steps on ReactJS and GraphQL and allows you to describe the data each component needs in isolation. Then the framework assembles the query, which needs to be sent to the server. Still in development, but seems like a nice approach, especially for bigger apps with a lot of components and devs working on them.
 
 Generally I really liked the conference and Barcelona as a hosting city, so I will definitely try to come back next year. I have a big list of technologies to read about and play with. Hope I will have enough time to go through everything until next year ;-).
