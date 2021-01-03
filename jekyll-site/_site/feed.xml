@@ -1,0 +1,1412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <description>Random pieces of wisdom about technology</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 13 Sep 2016 15:48:04 +0300</pubDate>
+    <lastBuildDate>Tue, 13 Sep 2016 15:48:04 +0300</lastBuildDate>
+    <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Full Stack Fest 2016 Recap</title>
+        <description>&lt;p&gt;I few days ago I attended the &lt;a href=&quot;https://2016.fullstackfest.com/&quot;&gt;Full Stack Fest&lt;/a&gt; in Barcelona. It was a great conference and I really enjoyed the way it was organized and the talks that I watched. Great thanks to the organizers &lt;a href=&quot;http://www.codegram.com/&quot;&gt;codegram&lt;/a&gt; and to &lt;a href=&quot;https://www.airhelp.com/en/&quot;&gt;AirHelp&lt;/a&gt; for sponsoring my attendance. I tried to keep notes during the conference about interesting ideas and projects, so this blog post is a recap of what I learned from the conference.&lt;/p&gt;
+
+&lt;h2 id=&quot;computing-the-first-100-years&quot;&gt;Computing: The first 100 years&lt;/h2&gt;
+
+&lt;p&gt;One of the interesting facts from this talk was that iPhone 6 has the processing power of 16 Cray-1 super-computers from the 1975. Great for playing Pokemon Go, as &lt;a href=&quot;https://twitter.com/joeerl&quot;&gt;Joe Armstrong&lt;/a&gt; said in the talk. Some more information in this infographic: &lt;a href=&quot;http://pages.experts-exchange.com/processing-power-compared/&quot;&gt;Processing Power Compared&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;unikernels-and-why-theyre-useful-or-not&quot;&gt;Unikernels and why they’re useful (or not)&lt;/h2&gt;
+
+&lt;p&gt;Generally the idea about the unikernels is a very interesting one. I had the opportunity to chat for an hour with &lt;a href=&quot;https://twitter.com/amirmc&quot;&gt;Amir Chaudhry&lt;/a&gt; and it turns out that the technology around unikernels is quite ahead and it is something, which Docker is investing resources into. I would expect we start to see them used more and more in the following years.&lt;/p&gt;
+
+&lt;p&gt;If you are wondering what is a unikernel, you can think about it as compiling your app together with all the required pieces of the OS into one bundle. The benefit will be:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Smaller size of the application containers&lt;/li&gt;
+  &lt;li&gt;Smaller attack surface for possible exploits&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;what-did-alphago-do-to-beat-the-strongest-human-go-player&quot;&gt;What did AlphaGo do to beat the strongest human Go player?&lt;/h2&gt;
+
+&lt;p&gt;This was the most interesting machine learning talk for me. I haven’t read details how exactly was the AlphaGo implemented and the talk gave a nice overview of that. The whole algorithm is a combination between neural networks and &lt;a href=&quot;https://en.wikipedia.org/wiki/Monte_Carlo_tree_search&quot;&gt;Monte Carlo tree search&lt;/a&gt;. A very interesting idea emerged from this talk for me and this is to use neural networks to implement human “intuition”. It is all pattern matching at the end and the idea of using neural networks for that is not new, but thinking about a trained network as an implementation of human intuition looks really nice to me.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-secure-are-docker-containers&quot;&gt;How secure are Docker containers?&lt;/h2&gt;
+
+&lt;p&gt;A very interesting talk! Several things I didn’t know about docker from it:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;the &lt;code class=&quot;highlighter-rouge&quot;&gt;--pids-limit&lt;/code&gt; flag, which limits the number of processes in the container. An easy way to prevent fork-bombs. The default is -1 (unlimited)&lt;/li&gt;
+  &lt;li&gt;the &lt;code class=&quot;highlighter-rouge&quot;&gt;--read-only&lt;/code&gt; flag, which mounts the root FS in the container as read only. Very useful if you want to make sure a container is not writing on the FS (and creating additional layers and stuff)&lt;/li&gt;
+  &lt;li&gt;limiting the systems calls in a container using &lt;a href=&quot;https://github.com/docker/docker/blob/master/docs/security/seccomp.md&quot;&gt;seccomp&lt;/a&gt;. Comes with a performance penalty, so be cautious.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://dockerbench.com/&quot;&gt;http://dockerbench.com/&lt;/a&gt; is a docker container, which checks for dozens of common best-practices around deploying Docker containers in production. Haven’t tried it, but looks very interesting.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Finally a thing not directly connected to docker, but very relevant for security: the &lt;a href=&quot;https://www.shodan.io/&quot;&gt;Shodan&lt;/a&gt; search engine. It indexes the servers around Internet and allows you to find machines, that reply in a certain way on some port. Very useful for hackers to find unprotected docker machines, for example. The bottomline - secure your services, as hackers will certainly find you!&lt;/p&gt;
+
+&lt;h2 id=&quot;microservice-pipeline-architecture&quot;&gt;Microservice Pipeline Architecture&lt;/h2&gt;
+
+&lt;p&gt;This was a talk about the BBC website, which is basically a precomputed cache, which is updated on each update of the content. They are open sourcing their system, so it is worth having a look at it: &lt;a href=&quot;https://github.com/BBC-News/alephant&quot;&gt;alephant&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;building-a-recommendation-engine-with-machine-learning-techniques&quot;&gt;Building a Recommendation Engine with Machine Learning Techniques&lt;/h2&gt;
+
+&lt;p&gt;If you’ve done machine learning this talk would probably have been a bit basic to you. It was a kind of introduction to machine learning and how to approach learning about it. I took one interesting project out of it: &lt;a href=&quot;https://rapidminer.com/&quot;&gt;RapidMiner&lt;/a&gt;. Looks like an IDE for doing machine learning. Seems quite pricey if you handle non-trivial amount of data, but might be a nice resource for novices to learn the basics.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-future-of-es6&quot;&gt;The future of ES6&lt;/h2&gt;
+
+&lt;p&gt;This talk gave an interesting insight how the JavaScript is evolving as a language. Each proposal goes through several stages as it matures. If the feature is not working well it is abandoned. For example here are all &lt;a href=&quot;https://github.com/tc39/proposals/blob/master/stage-0-proposals.md&quot;&gt;Stage 0 proposals&lt;/a&gt; and here are the more evolved &lt;a href=&quot;https://github.com/tc39/proposals&quot;&gt;Stage 1+ proposals&lt;/a&gt;. Also one can follow the discussion about the feature on the &lt;a href=&quot;https://esdiscuss.org/&quot;&gt;ES Discuss website&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;best-practices-on-building-a-ui-component-library-for-your-company&quot;&gt;Best Practices on building a UI component library for your company&lt;/h2&gt;
+
+&lt;p&gt;I really liked this talk as it describes something, which I believe more and more companies are going to adopt in their front-end workflow: reusable, isolated HTML+CSS components. &lt;a href=&quot;https://twitter.com/DavidWells&quot;&gt;David Wells&lt;/a&gt; described a nice workflow how to build such a component library using best practices and technologies. He mentioned some existing component libraries that are worth exploring:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://lightningdesignsystem.com/&quot;&gt;Lightning Design System&lt;/a&gt; from Salesforce&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ux.mulesoft.com/#/&quot;&gt;MuleSoft Components&lt;/a&gt; which are based on ReactJS&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bradfrost.com/blog/post/atomic-web-design/&quot;&gt;Atomic Design&lt;/a&gt;, which is the philosophy on which all these component libraries are based on&lt;/li&gt;
+  &lt;li&gt;And finally a list of &lt;a href=&quot;http://davidwells.io/19-open-source-react-component-libraries-to-use-in-your-next-project/&quot;&gt;19 Open Source React Component Libraries to use in your next project&lt;/a&gt; which covers some more&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In order to build a component library, which provides truly isolated components (the CSS of one component does not impact the CSS of the others), &lt;a href=&quot;https://github.com/postcss/postcss&quot;&gt;PostCSS&lt;/a&gt; is used. Looks like a very useful project that I will definitely check out. There is a talk from David Wells on the topic: &lt;a href=&quot;https://vimeo.com/173122870&quot;&gt;Bulletproof CSS in React&lt;/a&gt;. I am using such CSS namespacing on the projects I work on now, but one thing that I am not doing to resetting all inherited properties of the components, which ensures true isolation. There is a plugin for PostCSS, which does that.&lt;/p&gt;
+
+&lt;p&gt;One thing was mentioned in the talk, that I haven’t thought about: font icons are inferior to SVG icons, because they can be only 1 color. Here is an example from &lt;a href=&quot;http://lightningdesignsystem.com/icons/&quot;&gt;Lightning Design System&lt;/a&gt; which shows how cool multicolor icons can look like. SVG icons seems to be the future.&lt;/p&gt;
+
+&lt;p&gt;During the talk a very interesting project was mentioned: &lt;a href=&quot;https://phenomic.io/&quot;&gt;Phenomic&lt;/a&gt;. It allows to generate static HTML websites from ReactJS projects. The sites will work as static if there is no JavaScript enabled, but if JS is enabled they will load as static and provide a dynamic UX.&lt;/p&gt;
+
+&lt;h2 id=&quot;see-the-data-flowing-through-your-app&quot;&gt;See the data flowing through your app&lt;/h2&gt;
+
+&lt;p&gt;This was a talk about building front-end apps using reactive programming. &lt;a href=&quot;https://twitter.com/andrestaltz&quot;&gt;André Staltz&lt;/a&gt; made a great opening of his talk with some special effects and definitely took the attention of the audience. He showed what it looks like to build apps using &lt;a href=&quot;http://cycle.js.org/&quot;&gt;Cycle.js&lt;/a&gt;. Seems like a very promising technology. Worth to mention that it has a very nice Chrome plugin, which allows you to see how the data is flowing through your app.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-build-a-website-that-will-eventually-work-on-mars&quot;&gt;How to build a website that will (eventually) work on Mars?&lt;/h2&gt;
+
+&lt;p&gt;So here is a talk with quite a bombastic title. It was discussing various aspects of the data transfer between planets, which are mainly caused by the speed of light. Some interesting projects mentioned during the talk:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pouchdb.com/&quot;&gt;PouchDB&lt;/a&gt; is a DB which runs within your browser, so you can store data locally while your app is offline and sync it when it goes online again&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/mafintosh/hyperdrive&quot;&gt;Hyperdrive&lt;/a&gt; is a peer to peer data distribution protocol written in JS&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ipfs.io/&quot;&gt;IPFS&lt;/a&gt; is a peer-to-peer hypermedia protocol, which allows to have a distributed web. Might be the way to handle content efficiently between planets, where each planet will have a local version of the global web, which is synchronized on demand.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;reactive-reality--virtual-reality-is-here-in-your-browser&quot;&gt;Reactive Reality &amp;amp; Virtual Reality is Here, in your Browser&lt;/h2&gt;
+
+&lt;p&gt;These were two talks about virtual reality in the web. Looks like an early stage technology with some interesting potential use cases. The projects mentioned:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://konvajs.github.io/&quot;&gt;Konva&lt;/a&gt; is a library for drawing on html5 canvas&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lavrton/react-konva&quot;&gt;React Konva&lt;/a&gt; allows to use Konva with the ReactJS&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aframe.io/&quot;&gt;A-frame&lt;/a&gt; is a JS framework for building VR worlds for the web&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;the-physical-web-building-on-top-of-the-open-web&quot;&gt;The Physical Web: building on top of the open web&lt;/h2&gt;
+
+&lt;p&gt;I was totally blown away by this talk from &lt;a href=&quot;https://twitter.com/scottjenson&quot;&gt;Scott Jenson&lt;/a&gt;. The Physical Web essentially allows you to put a small beacon in some physical object and transmit an URL using BLE. This is a very powerful concept, as it allows to interact with objects around you without the need of downloading a mobile app. For example you can approach a parking meter, see its URL, open it and pay for your parking without installing an app. Or approach a monument, open its URL and read more about it. Or have a box of pills, which broadcasts an URL, on which you can monitor when you need to take your medication and once you access it, receive push notifications when you need to take the next dose. The possibilities are endless, so I urge you to read more about &lt;a href=&quot;https://google.github.io/physical-web/&quot;&gt;Physical Web&lt;/a&gt; and tell people around you more about it. This simple technology looks like a peek in the future.&lt;/p&gt;
+
+&lt;h2 id=&quot;final-words&quot;&gt;Final words&lt;/h2&gt;
+
+&lt;p&gt;There are some technologies I didn’t mention above, where were a recurring topic during the conference. These you probably have heard of and it seems they are getting wider adoption:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://facebook.github.io/react/&quot;&gt;ReactJS&lt;/a&gt; - most of the front-end talks were somehow connected to React. Even the VR talks were using ReactJS for rendering&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/facebook/graphql&quot;&gt;GraphQL&lt;/a&gt; was mentioned a lot. The main reason are the mobile networks and the high latency they have, which makes accessing websites that make many HTTP requests a pain. HTTP/2 is going to fix that for the assets, but for the server side data, GraphQL seems to be the answer&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://facebook.github.io/relay/&quot;&gt;Facebook Relay&lt;/a&gt; was also mentioned. It is a technology which steps on ReactJS and GraphQL and allows you to describe the data each component needs in isolation. Then the framework assembles the query, which needs to be sent to the server. Still in development, but seems like a nice approach, especially for bigger apps with a lot of components and devs working on them.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Generally I really liked the conference and Barcelona as a hosting city, so I will definitely try to come back next year. I have a big list of technologies to read about and play with. Hope I will have enough time to go through everything until next year ;-).&lt;/p&gt;
+</description>
+        <pubDate>Mon, 12 Sep 2016 00:00:00 +0300</pubDate>
+        <link>http://localhost:4000/2016/09/12/fullstackfest-2016-recap/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/09/12/fullstackfest-2016-recap/</guid>
+        
+        <category>fullstackfest</category>
+        
+        <category>opensource</category>
+        
+        <category>conference</category>
+        
+        <category>barcelona</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Development environment for microservices with docker-compose</title>
+        <description>&lt;p&gt;Developing apps as a set of microservices is getting more and more popular in the recent years. Usually teams decide to adopt this approach as a way to decrease the complexity of their projects. I won’t go into details if this approach is good or bad, but I’m convinced that it has its place in the arsenal of software practices a good engineer should have.&lt;/p&gt;
+
+&lt;p&gt;One of the problems I’ve seen with this approach is the increased complexity of running the whole system. This is because with each new microservice, the developer usually needs to run a separate database and/or memcache/redis/rabbitmq/nosql storage. As the number of services grow this becomes a bigger problem (usually anything with more than 2 services is getting quite hard to run and configure). This is especially problematic for new team members that need to run the app and play with it as they need to understand the dependencies of each microservice.&lt;/p&gt;
+
+&lt;p&gt;Here I will show you an example how to tackle this problem using &lt;a href=&quot;https://docs.docker.com/compose/&quot;&gt;docker-compose&lt;/a&gt;. In order to make the task easier I will show you how to run a simple app, which needs 5 difference processes to operate (1 app server, 2 storages and 2 background workers). Let’s start.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-example-app&quot;&gt;The example app&lt;/h2&gt;
+
+&lt;p&gt;The app we are going to work with is a simplified source code grading system. The idea is that users submit source codes from a web UI, the source codes are stored in a PostgreSQL database and enqueued in a RabbitMQ queue for grading. There is a separate grading service, that reads the enqueued sources codes, calculates the score of each of them and enqueues back the score. Then the frontend reads the scores from RabbitMQ and updates the PostgreSQL database with the scores and the web UI uses this data to show a ranklist of all users.&lt;/p&gt;
+
+&lt;p&gt;Each of the apps are developed in a separate git repository. Here are the repos:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Frontend - a simple sinatra app located here: &lt;a href=&quot;https://github.com/valo/example-docker-services-frontend&quot;&gt;https://github.com/valo/example-docker-services-frontend&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Grader - a simple background job processor which you can see here: &lt;a href=&quot;https://github.com/valo/example-docker-services-grader&quot;&gt;https://github.com/valo/example-docker-services-grader&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here is a diagram of the microservices and the database storages and how they are connected with each other:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/example_docker_services_app.png&quot; alt=&quot;png&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;dev-environment-requirements&quot;&gt;Dev environment requirements&lt;/h2&gt;
+
+&lt;p&gt;We have several requirements for the dev environment so that it is effective and productive:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It should be possible to run all the apps with a single command&lt;/li&gt;
+  &lt;li&gt;When a change is done in the code/templates this should be visible on a page reload&lt;/li&gt;
+  &lt;li&gt;It should be possible to run different apps without caring about clashing dependencies or incompatible libs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Basically we should be able to work with several such projects and each of them could be using different version of the same DB. The problem with the live reload is also very important as this is a key feature any developer rely on for fast prototyping.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-solution---docker-compose&quot;&gt;The solution - docker-compose&lt;/h2&gt;
+
+&lt;p&gt;Probably you’ve heard about containers, docker and virtualization. These tools could be a viable solution of the above problem. In order to meet the above requirements you need to combine the following things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Tools-Submodules&quot;&gt;git submodules&lt;/a&gt; - it is possible to have a single repository, which has links to the master branches of all microservices you have. Here is an example: &lt;a href=&quot;https://github.com/valo/example-docker-services&quot;&gt;https://github.com/valo/example-docker-services&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Dockerfile for each microservice - it describes the dependencies of each microservice. Here is an example for the frontend app: &lt;a href=&quot;https://github.com/valo/example-docker-services-frontend/blob/master/Dockerfile&quot;&gt;https://github.com/valo/example-docker-services-frontend/blob/master/Dockerfile&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.docker.com/compose/&quot;&gt;docker-compose&lt;/a&gt; - a tool, which allows to describe the services in your app and the links between them. Here is an example configuration file: &lt;a href=&quot;https://github.com/valo/example-docker-services/blob/master/docker-compose.yml&quot;&gt;https://github.com/valo/example-docker-services/blob/master/docker-compose.yml&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;(optional) &lt;a href=&quot;https://github.com/ddollar/foreman&quot;&gt;foreman&lt;/a&gt; - allows you to run several processes with a single commands. Very useful if you have an app which serves HTTP requests and also has background workers. Here is an example for the frontend app: &lt;a href=&quot;https://github.com/valo/example-docker-services-frontend/blob/master/Procfile&quot;&gt;https://github.com/valo/example-docker-services-frontend/blob/master/Procfile&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;prerequisites-for-osx&quot;&gt;Prerequisites for OSX&lt;/h3&gt;
+
+&lt;p&gt;First you need to install &lt;code class=&quot;highlighter-rouge&quot;&gt;docker&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose&lt;/code&gt;. On OS X I recommend using &lt;a href=&quot;http://brew.sh/&quot;&gt;homebrew&lt;/a&gt; to install all the require dependencies:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;brew install caskroom/cask/brew-cask
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;brew cask install virtualbox
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;brew install docker-machine docker docker-compose
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;docker-machine create --driver virtualbox dev
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;eval&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;docker-machine env dev&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This is going to install VirtualBox, docker-machine, docker and docker-compose and then create a linux VM which will host your docker containers. This is needed because docker can’t run natively on OS X. You can read more about docker-machine from its docs on &lt;a href=&quot;https://docs.docker.com/machine/&quot;&gt;https://docs.docker.com/machine/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Keep in mind that the last command will setup the environment for the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose&lt;/code&gt; command. If you open a new shell you need to run &lt;code class=&quot;highlighter-rouge&quot;&gt;eval $(docker-machine env dev)&lt;/code&gt; again, so that you can control the containers in the VM.&lt;/p&gt;
+
+&lt;h3 id=&quot;setup&quot;&gt;Setup&lt;/h3&gt;
+
+&lt;p&gt;You need to make some adjustments to your app, so that you can run it with docker-compose.&lt;/p&gt;
+
+&lt;h4 id=&quot;use-environment-variables-for-your-config&quot;&gt;Use environment variables for your config&lt;/h4&gt;
+
+&lt;p&gt;You need to configure your microservices with environment variables. All the links to external services should be configurable from the environment. For example the frontend app allows to set the rabbitMQ and PostgreSQL urls with the environment variables &lt;code class=&quot;highlighter-rouge&quot;&gt;DATABASE_URL&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;AMPQ_ADDRESS&lt;/code&gt;. This convention is part of the &lt;a href=&quot;http://12factor.net/config&quot;&gt;12 factor app&lt;/a&gt; manifesto.&lt;/p&gt;
+
+&lt;h4 id=&quot;create-dockerfile-for-each-microservice&quot;&gt;Create Dockerfile for each microservice&lt;/h4&gt;
+
+&lt;p&gt;You will need a Dockerfile for each microservice, which allows to run the service in a container. In our app we can use the ruby 2.2 docker image and install any extra gems we need to run the app. Here is an example Dockerfile:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dockerfile&quot; data-lang=&quot;dockerfile&quot;&gt;FROM ruby:2.2-onbuild
+RUN gem install foreman
+
+COPY . /app
+WORKDIR /app
+
+CMD foreman start&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This Dockerfile uses the &lt;a href=&quot;https://hub.docker.com/_/ruby/&quot;&gt;ruby 2.2 image&lt;/a&gt; from docker hub. It installs the &lt;code class=&quot;highlighter-rouge&quot;&gt;foreman&lt;/code&gt; gem, which we need to run the service. Then imports the source code of the project in the &lt;code class=&quot;highlighter-rouge&quot;&gt;/app&lt;/code&gt; folder and sets the working directory there (all commands will be ran in that folder). Finally it runs the service with the &lt;code class=&quot;highlighter-rouge&quot;&gt;foreman start&lt;/code&gt; command, which will boot the webserver and run the background workers.&lt;/p&gt;
+
+&lt;h4 id=&quot;create-a-git-repo-with-submodules&quot;&gt;Create a git repo with submodules&lt;/h4&gt;
+
+&lt;p&gt;Usually each of the microservices lives in its own git repository, so it is useful to have a “root” repository, which has links to each service of the app. You can have git submodules that track a given branch of each submodule. You can create these submodules like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git init
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git submodule add -b master git@github.com:valo/example-docker-services-frontend.git
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git submodule add -b master git@github.com:valo/example-docker-services-grader.git
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git commit -m &lt;span class=&quot;s2&quot;&gt;&quot;Import all microservices as modules&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The above commands will create a repository like this one: &lt;a href=&quot;https://github.com/valo/example-docker-services&quot;&gt;https://github.com/valo/example-docker-services&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;define-a-docker-compose-config&quot;&gt;Define a docker-compose config&lt;/h4&gt;
+
+&lt;p&gt;Finally you need a &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose&lt;/code&gt; config, which describes all services and their dependencies. Here is the config for the app that we have:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;s&quot;&gt;frontend&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./example-docker-services-frontend&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;4567:4567&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;links&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;rabbitmq&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;postgres&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AMPQ_ADDRESS=amqp://rabbitmq:5672&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;DATABASE_URL=postgres://postgres:mysecretpassword@postgres:5432&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./example-docker-services-frontend/:/app&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;grader&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./example-docker-services-grader&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;links&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;rabbitmq&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AMPQ_ADDRESS=amqp://rabbitmq:5672&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./example-docker-services-grader/:/app&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;rabbitmq&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;rabbitmq&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;5672&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;postgres&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;postgres:latest&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;5432&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;POSTGRES_PASSWORD=mysecretpassword&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;POSTGRES_USER=postgres&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;There are several important parts in this config. There is a root element for each service (frontend, grader, rabbitmq and postgresql). Each of these services can be referenced in the &lt;code class=&quot;highlighter-rouge&quot;&gt;environment&lt;/code&gt; section, so that we can link services together. You can see how the &lt;code class=&quot;highlighter-rouge&quot;&gt;rabbitmq&lt;/code&gt; service is referenced in the &lt;code class=&quot;highlighter-rouge&quot;&gt;AMPQ_ADDRESS&lt;/code&gt; variable.&lt;/p&gt;
+
+&lt;p&gt;It is also very important to link the local folders with &lt;code class=&quot;highlighter-rouge&quot;&gt;volumes&lt;/code&gt; sections. This provides the “auto-reload” functionality, as the files in the container are going to be updates as you change them locally.&lt;/p&gt;
+
+&lt;h4 id=&quot;putting-it-all-together&quot;&gt;Putting it all together&lt;/h4&gt;
+
+&lt;p&gt;Finally after you have all this setup, you can run all the services by just running:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git clone git@github.com:valo/example-docker-services.git
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;example-docker-services
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;docker-compose up&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And then to open the frontend application you can run:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;open http://&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;docker-machine ip dev&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;:4567&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;running-setup-commands&quot;&gt;Running setup commands&lt;/h4&gt;
+
+&lt;p&gt;Most of the time you need to run some commands to setup the DB, import data, etc. You can do that like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;docker-compose run frontend bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;rake db:migrate db:seed&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Essenatially you need to prefix each command with &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose run &amp;lt;service_name&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Using &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose&lt;/code&gt; is a great way to run multiple services in an easy and reproducible way. There are a lot of details around this tool, but I think the example project here will give you a good foundation to migrate your complex app to a more managable setup.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 15 Nov 2015 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/2015/11/15/microservices-dev-environment-with-docker/</link>
+        <guid isPermaLink="true">http://localhost:4000/2015/11/15/microservices-dev-environment-with-docker/</guid>
+        
+        <category>docker</category>
+        
+        <category>docker-compose</category>
+        
+        <category>microservices</category>
+        
+        <category>containers</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>AWS Machine Learning Overview</title>
+        <description>&lt;p&gt;In the last blog post I showed you how to &lt;a href=&quot;http://www.valentinmihov.com/2015/04/17/adult-income-data-set/&quot;&gt;slice and dice a data
+set&lt;/a&gt; describing
+individual people and trying to predict if they make more than $50,000 annually.
+We used &lt;a href=&quot;http://ipython.org/&quot;&gt;ipython&lt;/a&gt; and a bunch of libraries to do the
+analysis, build a prediction model and evaluate its performance. This requires
+having knowledge about how to use all these python libraries and what exactly to
+do with the data (although you can use the ipython notebook from that blog post
+as a general framework to analyze any data set). It also requires installing all
+this software on your system, which can be non-trivial.&lt;/p&gt;
+
+&lt;p&gt;Recently Amazon released a new AWS service called &lt;a href=&quot;http://aws.amazon.com/machine-learning/&quot;&gt;Machine
+Learning&lt;/a&gt;. It provides a simplified and
+easily scalable way to build machine learning models over arbitrary data sets.
+In this blog post I will make an overview of this service and compare its
+results with the ones we obtained using ipython on the same data set we used the
+last time.&lt;/p&gt;
+
+&lt;h2 id=&quot;import-the-data-set-into-aws&quot;&gt;Import the data set into AWS&lt;/h2&gt;
+
+&lt;p&gt;In order to import the data set into the Amazon’s service you need to upload it
+on S3. I uploaded &lt;a href=&quot;https://archive.ics.uci.edu/ml/machine-learning-
+databases/adult/adult.data&quot;&gt;the adult&lt;/a&gt; data set, which I used previously, on S3 without
+making any modification on it. After the import was ready it is possible to view
+the distribution of the target values:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [1]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;IPython.display&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Image&lt;/span&gt; 
+&lt;span class=&quot;n&quot;&gt;Image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;aws_target_stats.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/aws-machine-learning-overview_files/aws-machine-learning-overview_2_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It also allows you to view the distribution of the values for the numerical and
+categorical features. It is very similar to what we did &lt;a href=&quot;http://www.valentinmihov.com/2015/04/17/adult-income-data-set/#analyze-
+the-data&quot;&gt;last
+time&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [2]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;Image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;aws_martial_status_stats.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/aws-machine-learning-overview_files/aws-machine-learning-overview_4_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [3]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;Image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;aws_age_stats.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/aws-machine-learning-overview_files/aws-machine-learning-overview_5_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the above screenshot you can see that the distribution of the first variable
+in the data set: &lt;code class=&quot;highlighter-rouge&quot;&gt;Age&lt;/code&gt;. It is very similar to what we saw in our ipython
+analysis.&lt;/p&gt;
+
+&lt;h2 id=&quot;building-a-model&quot;&gt;Building a model&lt;/h2&gt;
+
+&lt;p&gt;After we looked in the data we can try to build a model, which will predict the
+target value. In this case it is a classification model with 2 possible classes
+(‘under or equal to $50k/year’ and ‘over $50k/year’).&lt;/p&gt;
+
+&lt;p&gt;After building the model we see that AWS have split our data into two and used
+70% of the data to build a model and remaining 30% to test the model. This is a
+standard approach when building a machine learning model and prevents
+overfitting.&lt;/p&gt;
+
+&lt;p&gt;We also see that the AWS UI provides a confusion matrix of the model and F1
+scores for each of the classes.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [4]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;Image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;aws_confusion_matrix.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/aws-machine-learning-overview_files/aws-machine-learning-overview_8_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see the &lt;a href=&quot;http://en.wikipedia.org/wiki/F1_score&quot;&gt;F1 score&lt;/a&gt; of the
+positive target, which in this case is &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;50K&lt;/code&gt;, is 0.69. This is slightly better
+than the result we got in our ipython analysis using &lt;a href=&quot;http://en.wikipedia.org/wiki/Dummy_variable_%28statistics%29&quot;&gt;dummy
+variables&lt;/a&gt; which
+was 0.65. This means that the machine learning model was smart enough to make
+this optimization in the data. Pretty cool!&lt;/p&gt;
+
+&lt;h2 id=&quot;missing-data&quot;&gt;Missing data&lt;/h2&gt;
+
+&lt;p&gt;One thing that can be noticed while browsing the data in the AWS UI is that
+there is no missing data detected in the dataset, which is not correct. There is
+a bunch of instances with missing values, that are marked with &lt;code class=&quot;highlighter-rouge&quot;&gt;?&lt;/code&gt;. AWS was not
+able to recognize these as missing values. Interestingly even after replacing
+the &lt;code class=&quot;highlighter-rouge&quot;&gt;?&lt;/code&gt; with just empty strings AWS didn’t recognize the values as missing.
+After digging into the documentation it turns out that &lt;a href=&quot;http://docs.aws.amazon.com/machine-
+learning/latest/dg/creating_datasources.html#missing-values&quot;&gt;missing values are
+supported only for numerical data&lt;/a&gt;. This is really
+surprising as for categorical data this is important when building a dummy
+variable transformation. For example if you have a &lt;code class=&quot;highlighter-rouge&quot;&gt;Gender&lt;/code&gt; feature that gets
+values &lt;code class=&quot;highlighter-rouge&quot;&gt;Male&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Female&lt;/code&gt; you will have 2 dummy variables &lt;code class=&quot;highlighter-rouge&quot;&gt;Gender_Male&lt;/code&gt; and
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Gender_Female&lt;/code&gt; taking value of 0 or 1. If you have a missing value for some
+instance you should set both variables to 0. For example look how the
+transformation should look like when you have missing data:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [5]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pandas&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pd&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_dummies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Male'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Female'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Male'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Male'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Gender&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;div style=&quot;max-height:1000px;max-width:1500px;overflow:auto;&quot;&gt;
+&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&quot;text-align: right;&quot;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;Gender_Female&lt;/th&gt;
+      &lt;th&gt;Gender_Male&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt; 0&lt;/td&gt;
+      &lt;td&gt; 1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt; 1&lt;/td&gt;
+      &lt;td&gt; 0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt; 0&lt;/td&gt;
+      &lt;td&gt; 1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt; 0&lt;/td&gt;
+      &lt;td&gt; 1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt; 0&lt;/td&gt;
+      &lt;td&gt; 0&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I am not sure AWS does this, but given that they don’t detect the missing
+values, then they probably interpret the missing values as just one more class
+for that feature, which I believe is not ideal.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Overall the AWS Machine Learning product looks great! We were able to load data,
+build and evaluate a &lt;a href=&quot;http://en.wikipedia.org/wiki/Logistic_regression&quot;&gt;Logistic
+Regression&lt;/a&gt; model just using
+the web UI. The results were awesome and comparable to the results we got using
+ipython, but with much less effort from our side.&lt;/p&gt;
+
+&lt;p&gt;The downside is the lack of options for machine learning algorithms. For example
+it would have been really awesome to compare the results from the logistic
+regression to a decision tree model, like
+&lt;a href=&quot;http://en.wikipedia.org/wiki/C4.5_algorithm&quot;&gt;C4.5&lt;/a&gt;. I am sure this is on the
+TODO list of the team developing this product.&lt;/p&gt;
+
+&lt;p&gt;Another thing I noticed is that the loading/building/evaluation cycle is quite
+slow. This is a problem, because usually when you work with data it is important
+to receive immediate feedback. Very often you want to make a small tweak and see
+how this affects your results. Doing this through the AWS UI will take you quite
+a lot of time, as one iteration could take more than 10 mins. If you perform a
+lot of experiments this time can pile up and impact your workflow significantly.&lt;/p&gt;
+
+&lt;p&gt;So if I need to summarize the pros and cons of AWS compared to the ipython
+toolkit:&lt;/p&gt;
+
+&lt;p&gt;Pros:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Very easy to use&lt;/li&gt;
+  &lt;li&gt;The results are comparable to a logistic regression with ipython, even
+slightly better (using all default settings)&lt;/li&gt;
+  &lt;li&gt;Easy data visualization of the distribution of the features&lt;/li&gt;
+  &lt;li&gt;Very easy to scale to large amounts of data&lt;/li&gt;
+  &lt;li&gt;Easier to integrate with your existing AWS deployments&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Cons:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Only logistic regression supported at the moment&lt;/li&gt;
+  &lt;li&gt;Lack of data analysis besides value distribution. Correlation would have been
+nice&lt;/li&gt;
+  &lt;li&gt;Lack of support for missing values in categorical features&lt;/li&gt;
+  &lt;li&gt;Very slow feedback cycle when working with data and models&lt;/li&gt;
+  &lt;li&gt;Overall has the most simple tools for data analysis. Not really a substitute
+for a full featured toolbox, like ipython&lt;/li&gt;
+  &lt;li&gt;Can’t examine the built model and the weights of each feature, like we did in
+the &lt;a href=&quot;http://www.valentinmihov.com/2015/04/17/adult-income-data-set
+/#logistic-regression-with-dummy-variables&quot;&gt;Logistic regression with dummy
+variables&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 24 Apr 2015 00:00:00 +0300</pubDate>
+        <link>http://localhost:4000/2015/04/24/aws-machine-learning-overview/</link>
+        <guid isPermaLink="true">http://localhost:4000/2015/04/24/aws-machine-learning-overview/</guid>
+        
+        <category>python</category>
+        
+        <category>notebook</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Adult Income Data Set Analysis with IPython</title>
+        <description>&lt;p&gt;In this blog post I will show you how to slice-n-dice the data set from &lt;a href=&quot;https://archive.ics.uci.edu/ml/datasets/Adult&quot;&gt;Adult
+Data Set MLR&lt;/a&gt; which contains
+income data for about 32000 people. We will look at the data and build a machine
+learning model (a &lt;a href=&quot;http://en.wikipedia.org/wiki/Logistic_regression&quot;&gt;logistic regression&lt;/a&gt;),
+which tries to predict if a person will make more than $50K a
+year, given data like education, gender and martial status.&lt;/p&gt;
+
+&lt;p&gt;Let’s first import some libraries that we are going to need for our analysis&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [1]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pandas&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pd&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;statsmodels&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sm&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;skl&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.preprocessing&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;preprocessing&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.linear_model&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;linear_model&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.cross_validation&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cross_validation&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.metrics&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;metrics&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.tree&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tree&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;seaborn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sns&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;First we need to read the data from the file, which contains comma separated
+columns. With the command below we will read the data skipping any spaces
+before/after the commas and mark the values ‘?’ as missing data points.&lt;/p&gt;
+
+&lt;h2 id=&quot;load-the-data&quot;&gt;Load the data&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;In [2]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;adult.data.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;Age&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Workclass&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fnlwgt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Education&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Education-Num&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Martial Status&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;Occupation&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Relationship&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Race&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Sex&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Capital Gain&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Capital Loss&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;Hours per week&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Country&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r'&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*,&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'python'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;na_values&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;?&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;div style=&quot;max-height:1000px;max-width:1500px;overflow:auto;&quot;&gt;
+&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&quot;text-align: right;&quot;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;Age&lt;/th&gt;
+      &lt;th&gt;Workclass&lt;/th&gt;
+      &lt;th&gt;fnlwgt&lt;/th&gt;
+      &lt;th&gt;Education&lt;/th&gt;
+      &lt;th&gt;Education-Num&lt;/th&gt;
+      &lt;th&gt;Martial Status&lt;/th&gt;
+      &lt;th&gt;Occupation&lt;/th&gt;
+      &lt;th&gt;Relationship&lt;/th&gt;
+      &lt;th&gt;Race&lt;/th&gt;
+      &lt;th&gt;Sex&lt;/th&gt;
+      &lt;th&gt;Capital Gain&lt;/th&gt;
+      &lt;th&gt;Capital Loss&lt;/th&gt;
+      &lt;th&gt;Hours per week&lt;/th&gt;
+      &lt;th&gt;Country&lt;/th&gt;
+      &lt;th&gt;Target&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;32556&lt;/th&gt;
+      &lt;td&gt; 27&lt;/td&gt;
+      &lt;td&gt;      Private&lt;/td&gt;
+      &lt;td&gt; 257302&lt;/td&gt;
+      &lt;td&gt; Assoc-acdm&lt;/td&gt;
+      &lt;td&gt; 12&lt;/td&gt;
+      &lt;td&gt; Married-civ-spouse&lt;/td&gt;
+      &lt;td&gt;      Tech-support&lt;/td&gt;
+      &lt;td&gt;      Wife&lt;/td&gt;
+      &lt;td&gt; White&lt;/td&gt;
+      &lt;td&gt; Female&lt;/td&gt;
+      &lt;td&gt;     0&lt;/td&gt;
+      &lt;td&gt; 0&lt;/td&gt;
+      &lt;td&gt; 38&lt;/td&gt;
+      &lt;td&gt; United-States&lt;/td&gt;
+      &lt;td&gt; &amp;lt;=50K&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;32557&lt;/th&gt;
+      &lt;td&gt; 40&lt;/td&gt;
+      &lt;td&gt;      Private&lt;/td&gt;
+      &lt;td&gt; 154374&lt;/td&gt;
+      &lt;td&gt;    HS-grad&lt;/td&gt;
+      &lt;td&gt;  9&lt;/td&gt;
+      &lt;td&gt; Married-civ-spouse&lt;/td&gt;
+      &lt;td&gt; Machine-op-inspct&lt;/td&gt;
+      &lt;td&gt;   Husband&lt;/td&gt;
+      &lt;td&gt; White&lt;/td&gt;
+      &lt;td&gt;   Male&lt;/td&gt;
+      &lt;td&gt;     0&lt;/td&gt;
+      &lt;td&gt; 0&lt;/td&gt;
+      &lt;td&gt; 40&lt;/td&gt;
+      &lt;td&gt; United-States&lt;/td&gt;
+      &lt;td&gt;  &amp;gt;50K&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;32558&lt;/th&gt;
+      &lt;td&gt; 58&lt;/td&gt;
+      &lt;td&gt;      Private&lt;/td&gt;
+      &lt;td&gt; 151910&lt;/td&gt;
+      &lt;td&gt;    HS-grad&lt;/td&gt;
+      &lt;td&gt;  9&lt;/td&gt;
+      &lt;td&gt;            Widowed&lt;/td&gt;
+      &lt;td&gt;      Adm-clerical&lt;/td&gt;
+      &lt;td&gt; Unmarried&lt;/td&gt;
+      &lt;td&gt; White&lt;/td&gt;
+      &lt;td&gt; Female&lt;/td&gt;
+      &lt;td&gt;     0&lt;/td&gt;
+      &lt;td&gt; 0&lt;/td&gt;
+      &lt;td&gt; 40&lt;/td&gt;
+      &lt;td&gt; United-States&lt;/td&gt;
+      &lt;td&gt; &amp;lt;=50K&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;32559&lt;/th&gt;
+      &lt;td&gt; 22&lt;/td&gt;
+      &lt;td&gt;      Private&lt;/td&gt;
+      &lt;td&gt; 201490&lt;/td&gt;
+      &lt;td&gt;    HS-grad&lt;/td&gt;
+      &lt;td&gt;  9&lt;/td&gt;
+      &lt;td&gt;      Never-married&lt;/td&gt;
+      &lt;td&gt;      Adm-clerical&lt;/td&gt;
+      &lt;td&gt; Own-child&lt;/td&gt;
+      &lt;td&gt; White&lt;/td&gt;
+      &lt;td&gt;   Male&lt;/td&gt;
+      &lt;td&gt;     0&lt;/td&gt;
+      &lt;td&gt; 0&lt;/td&gt;
+      &lt;td&gt; 20&lt;/td&gt;
+      &lt;td&gt; United-States&lt;/td&gt;
+      &lt;td&gt; &amp;lt;=50K&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;32560&lt;/th&gt;
+      &lt;td&gt; 52&lt;/td&gt;
+      &lt;td&gt; Self-emp-inc&lt;/td&gt;
+      &lt;td&gt; 287927&lt;/td&gt;
+      &lt;td&gt;    HS-grad&lt;/td&gt;
+      &lt;td&gt;  9&lt;/td&gt;
+      &lt;td&gt; Married-civ-spouse&lt;/td&gt;
+      &lt;td&gt;   Exec-managerial&lt;/td&gt;
+      &lt;td&gt;      Wife&lt;/td&gt;
+      &lt;td&gt; White&lt;/td&gt;
+      &lt;td&gt; Female&lt;/td&gt;
+      &lt;td&gt; 15024&lt;/td&gt;
+      &lt;td&gt; 0&lt;/td&gt;
+      &lt;td&gt; 40&lt;/td&gt;
+      &lt;td&gt; United-States&lt;/td&gt;
+      &lt;td&gt;  &amp;gt;50K&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;analyze-the-data&quot;&gt;Analyze the data&lt;/h2&gt;
+
+&lt;p&gt;Let’s plot the distribution of each feature, so that we have a better
+understanding what we have in our data. We draw the number of values for each
+category feature and the histogram of the values for each continuous feature.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [3]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;fig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figsize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cols&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;rows&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;column&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ax&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_subplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dtypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value_counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bar&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;axes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xticks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rotation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;vertical&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subplots_adjust&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hspace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wspace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/adult_income_data_set_files/adult_income_data_set_7_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see from the plots above our data is mostly concentrated in the USA
+with mostly male white people. This is a good thing to notice, as it may impact
+the conclusions we come to later.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [4]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Country&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value_counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;United-States    0.895857
+Mexico           0.019748
+Philippines      0.006081
+Germany          0.004207
+Canada           0.003716
+dtype: float64
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Indeed! 89% of the samples are for people from the US. Mexico comes next
+with less than 2%.&lt;/p&gt;
+
+&lt;p&gt;Now, let’s explore something else. The correlation between the different
+features. Generally it is not a good idea to have many correlated features, as
+it might be a sign that your data is not very good. For this purpose
+we will need to encode the categorical features as numbers. This can be done
+using the &lt;code class=&quot;highlighter-rouge&quot;&gt;LabelEncoder&lt;/code&gt; in the &lt;code class=&quot;highlighter-rouge&quot;&gt;scikit-learn&lt;/code&gt; package.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [5]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Encode the categorical features as numbers&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;number_encode_features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;encoders&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;column&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dtypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;encoders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;preprocessing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LabelEncoder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encoders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit_transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encoders&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Calculate the correlation and plot it&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;encoded_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number_encode_features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heatmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encoded_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;corr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;square&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/adult_income_data_set_files/adult_income_data_set_11_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We see there is a high correlation between &lt;code class=&quot;highlighter-rouge&quot;&gt;Education&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Education-Num&lt;/code&gt;.
+Let’s look at these columns&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [6]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Education&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Education-Num&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;div style=&quot;max-height:1000px;max-width:1500px;overflow:auto;&quot;&gt;
+&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&quot;text-align: right;&quot;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;Education&lt;/th&gt;
+      &lt;th&gt;Education-Num&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0 &lt;/th&gt;
+      &lt;td&gt;    Bachelors&lt;/td&gt;
+      &lt;td&gt; 13&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1 &lt;/th&gt;
+      &lt;td&gt;    Bachelors&lt;/td&gt;
+      &lt;td&gt; 13&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2 &lt;/th&gt;
+      &lt;td&gt;      HS-grad&lt;/td&gt;
+      &lt;td&gt;  9&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3 &lt;/th&gt;
+      &lt;td&gt;         11th&lt;/td&gt;
+      &lt;td&gt;  7&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4 &lt;/th&gt;
+      &lt;td&gt;    Bachelors&lt;/td&gt;
+      &lt;td&gt; 13&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;5 &lt;/th&gt;
+      &lt;td&gt;      Masters&lt;/td&gt;
+      &lt;td&gt; 14&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;6 &lt;/th&gt;
+      &lt;td&gt;          9th&lt;/td&gt;
+      &lt;td&gt;  5&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;7 &lt;/th&gt;
+      &lt;td&gt;      HS-grad&lt;/td&gt;
+      &lt;td&gt;  9&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;8 &lt;/th&gt;
+      &lt;td&gt;      Masters&lt;/td&gt;
+      &lt;td&gt; 14&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;9 &lt;/th&gt;
+      &lt;td&gt;    Bachelors&lt;/td&gt;
+      &lt;td&gt; 13&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;10&lt;/th&gt;
+      &lt;td&gt; Some-college&lt;/td&gt;
+      &lt;td&gt; 10&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;11&lt;/th&gt;
+      &lt;td&gt;    Bachelors&lt;/td&gt;
+      &lt;td&gt; 13&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;12&lt;/th&gt;
+      &lt;td&gt;    Bachelors&lt;/td&gt;
+      &lt;td&gt; 13&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;13&lt;/th&gt;
+      &lt;td&gt;   Assoc-acdm&lt;/td&gt;
+      &lt;td&gt; 12&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;14&lt;/th&gt;
+      &lt;td&gt;    Assoc-voc&lt;/td&gt;
+      &lt;td&gt; 11&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;As you can see these two columns actually represent the same features, but
+encoded as strings and as numbers. We don’t need the string representation, so
+we can just delete this column. Note that it is a much better option to delete
+the &lt;code class=&quot;highlighter-rouge&quot;&gt;Education&lt;/code&gt; column as the &lt;code class=&quot;highlighter-rouge&quot;&gt;Education-Num&lt;/code&gt; has the important property that
+the values are ordered: the higher the number, the higher the education that
+person has. This is a vaulable information a machine learning algorithm can use.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [7]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;del&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Education&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;So it seems that the data is mostly OK with the exception of &lt;code class=&quot;highlighter-rouge&quot;&gt;Sex&lt;/code&gt; and
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Relationship&lt;/code&gt;, which seems to be negatively correlated. Let’s explore that for
+a bit&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [8]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Sex&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Relationship&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;div style=&quot;max-height:1000px;max-width:1500px;overflow:auto;&quot;&gt;
+&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&quot;text-align: right;&quot;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;Sex&lt;/th&gt;
+      &lt;th&gt;Relationship&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0 &lt;/th&gt;
+      &lt;td&gt;   Male&lt;/td&gt;
+      &lt;td&gt; Not-in-family&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1 &lt;/th&gt;
+      &lt;td&gt;   Male&lt;/td&gt;
+      &lt;td&gt;       Husband&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2 &lt;/th&gt;
+      &lt;td&gt;   Male&lt;/td&gt;
+      &lt;td&gt; Not-in-family&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3 &lt;/th&gt;
+      &lt;td&gt;   Male&lt;/td&gt;
+      &lt;td&gt;       Husband&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4 &lt;/th&gt;
+      &lt;td&gt; Female&lt;/td&gt;
+      &lt;td&gt;          Wife&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;5 &lt;/th&gt;
+      &lt;td&gt; Female&lt;/td&gt;
+      &lt;td&gt;          Wife&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;6 &lt;/th&gt;
+      &lt;td&gt; Female&lt;/td&gt;
+      &lt;td&gt; Not-in-family&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;7 &lt;/th&gt;
+      &lt;td&gt;   Male&lt;/td&gt;
+      &lt;td&gt;       Husband&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;8 &lt;/th&gt;
+      &lt;td&gt; Female&lt;/td&gt;
+      &lt;td&gt; Not-in-family&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;9 &lt;/th&gt;
+      &lt;td&gt;   Male&lt;/td&gt;
+      &lt;td&gt;       Husband&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;10&lt;/th&gt;
+      &lt;td&gt;   Male&lt;/td&gt;
+      &lt;td&gt;       Husband&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;11&lt;/th&gt;
+      &lt;td&gt;   Male&lt;/td&gt;
+      &lt;td&gt;       Husband&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;12&lt;/th&gt;
+      &lt;td&gt; Female&lt;/td&gt;
+      &lt;td&gt;     Own-child&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;13&lt;/th&gt;
+      &lt;td&gt;   Male&lt;/td&gt;
+      &lt;td&gt; Not-in-family&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;14&lt;/th&gt;
+      &lt;td&gt;   Male&lt;/td&gt;
+      &lt;td&gt;       Husband&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Yes. The data looks correlated, because for example &lt;code class=&quot;highlighter-rouge&quot;&gt;Male&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Husband&lt;/code&gt; are
+highly correlated values, as well as &lt;code class=&quot;highlighter-rouge&quot;&gt;Female&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Wife&lt;/code&gt;. There is no easy way
+to tackle this problem, so let’s carry on.&lt;/p&gt;
+
+&lt;h2 id=&quot;build-a-classifier&quot;&gt;Build a classifier&lt;/h2&gt;
+
+&lt;p&gt;Now that we explored our data, let’s try to build a classifier which tries to
+predict what will be the income of a given person given the features we have in
+our dataset.&lt;/p&gt;
+
+&lt;p&gt;First we need to encode the features as numbers as the classifiers cannot work
+with string features. As we saw a while ago this can be achieved easily with the
+function we defined earlier. Let’s encode the data and show the histograms of
+the values again.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [9]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;encoded_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encoders&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number_encode_features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figsize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cols&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;rows&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encoded_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;column&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encoded_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ax&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_subplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;encoded_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xticks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rotation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;vertical&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subplots_adjust&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hspace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wspace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/adult_income_data_set_files/adult_income_data_set_20_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see we have our data properly encoded and it seems to make sense.
+Now, let’s try to build a classifier for it. Before we do that, let’s split the
+data into a train and test set. This is a common approach to avoid overfitting.
+If we train and test the classifiers on the same data we will always get awesome
+results and we will most probably overfit the model. However if we test a
+classifier on data it has never seen we can be more confident it will perform
+better when ran on new data.&lt;/p&gt;
+
+&lt;h2 id=&quot;split-and-scale-the-features&quot;&gt;Split and scale the features&lt;/h2&gt;
+
+&lt;p&gt;Most machine learning algorithms like the features to be scaled with mean 0 and
+variance 1. This is called “removing the mean and scaling to unit variance”.
+This can be easily done with the &lt;code class=&quot;highlighter-rouge&quot;&gt;StandardScaler&lt;/code&gt; from &lt;code class=&quot;highlighter-rouge&quot;&gt;scikit-learn&lt;/code&gt;. Let’s
+scale the features and look at them again.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [10]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cross_validation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train_test_split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encoded_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encoded_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encoded_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;scaler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;preprocessing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StandardScaler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scaler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit_transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;f64&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;X_test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scaler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;f64&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;logistic-regression&quot;&gt;Logistic regression&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;In [11]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;cls&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;linear_model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LogisticRegression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;cls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;y_pred&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;confusion_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_pred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figsize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heatmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;annot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xticklabels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encoders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classes_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yticklabels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encoders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classes_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ylabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Real value&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xlabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Predicted value&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;F1 score: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;f&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f1_score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_pred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;coefs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Series&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coef_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;coefs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;coefs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bar&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;F1 score: 0.573306
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/adult_income_data_set_files/adult_income_data_set_25_1.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see we managed to achieve F1 score of 0.57 and the features that
+seems to contribute most positively to have an income of more than $50K are
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Capital Gain&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Education-Num&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Sex&lt;/code&gt;, while the features that contribute
+most negatively are &lt;code class=&quot;highlighter-rouge&quot;&gt;Martia Status&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Relationship&lt;/code&gt;. There is a problem here,
+though. Features like &lt;code class=&quot;highlighter-rouge&quot;&gt;Martial Status&lt;/code&gt; have values ranging from 0 to 6 and the
+order is really important here. In practice there is no particular order in that
+feature (unlike &lt;code class=&quot;highlighter-rouge&quot;&gt;Education-Num&lt;/code&gt; for which the higher the number, the better the
+education). We can fix this using &lt;em&gt;binary features&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;classify-using-binary-features&quot;&gt;Classify using binary features&lt;/h3&gt;
+
+&lt;p&gt;As a last step we can try to improve our classifier using binary attributes. Our
+current approach for encoding our data has the drawback that we put arbitrary
+order in our classes. For example we encode &lt;code class=&quot;highlighter-rouge&quot;&gt;Relationship&lt;/code&gt; with a number between
+1 and 5 and the logistic regression interprets these values as continuous
+variables and plugs them into an optimization function. This will cause
+different classes to have different weight into our model, which is not correct.
+Each class is theoretically equally weighted compared to the rest of the
+classes. In order to fix this we can use dummy variables.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [12]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;binary_data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_dummies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;original_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Let's fix the Target as it will be converted to dummy vars too&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;binary_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;binary_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Target_&amp;gt;50K&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;del&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;binary_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Target_&amp;lt;=50K&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;del&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;binary_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Target_&amp;gt;50K&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subplots&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figsize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heatmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binary_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;corr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;square&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/adult_income_data_set_files/adult_income_data_set_28_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now we have a bunch of features that have only the values 0 and 1. There is a
+lot of correlation between some of them, but let’s not look at this for now (for
+example Male and Female are negatively correlated).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In [13]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cross_validation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train_test_split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binary_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binary_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;binary_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;scaler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;preprocessing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StandardScaler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scaler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit_transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;X_test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scaler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;logistic-regression-with-dummy-variables&quot;&gt;Logistic Regression with dummy variables&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;In [14]:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;cls&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;linear_model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LogisticRegression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;cls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;y_pred&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;confusion_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_pred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figsize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heatmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;annot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xticklabels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encoders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classes_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yticklabels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encoders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classes_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ylabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Real value&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xlabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Predicted value&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;F1 score: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;f&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f1_score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_pred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;coefs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Series&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coef_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;coefs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ax&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;coefs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bar&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;F1 score: 0.651455
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/adult_income_data_set_files/adult_income_data_set_32_1.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
+
+&lt;p&gt;We managed to improve the &lt;a href=&quot;http://en.wikipedia.org/wiki/F1_score&quot;&gt;F1 score&lt;/a&gt; significantly by converting the data to use
+dummy variables. Also it seems that we managed to uncover some interesting
+insight from our model. It seems that the features that impacts the income of a
+person positively are &lt;code class=&quot;highlighter-rouge&quot;&gt;Capital Gain&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Married-civ-spounce&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Age&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Hours per
+week&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Exec-managerial&lt;/code&gt;. The features that impact it most negatively are
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Never married&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Own child&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Priv-house-serv&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Divorsed&lt;/code&gt; and unfortunately
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Female&lt;/code&gt;. One more proof that there is a gender inequality in our society.&lt;/p&gt;
+
+&lt;p&gt;As you can see we not only managed to build a machine learning model that we can
+use to classify new data, but we also managed to uncover some interesting
+insight from our data. This is one of the nice features of the linear models.
+They are not “black boxes”, like neural networks for example and allow to see
+what exactly the model is doing.&lt;/p&gt;
+
+&lt;p&gt;You can download the ipython notebook, which was used for generating the above
+analysis from &lt;a href=&quot;/notebooks/adult_income_data_set.ipynb&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 17 Apr 2015 21:20:14 +0300</pubDate>
+        <link>http://localhost:4000/2015/04/17/adult-income-data-set/</link>
+        <guid isPermaLink="true">http://localhost:4000/2015/04/17/adult-income-data-set/</guid>
+        
+        <category>python</category>
+        
+        <category>notebook</category>
+        
+        <category>machine learning</category>
+        
+        <category>logistic regression</category>
+        
+        <category>matplotlib</category>
+        
+        <category>data analysis</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>View vs Feature specs. What to use when</title>
+        <description>&lt;p&gt;Some may argue that the view specs in your rails project are just duplicating the feature specs you have. The idea of the view specs is to test the views in isolation, while the feature specs test user stories end-to-end, usually using tools like capybara and phantomjs (if you want to test JS functionality).&lt;/p&gt;
+
+&lt;p&gt;What I want to argue here is that in most of the cases the above statement is true, but the view specs are still very useful for testing edge cases and bugs you found. Having a feature spec for each edge case in your user story can make your test suite quite slow and also you will most probably have quite a lot of duplication in your specs. Let’s stop talking and look at some code and data.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 27 Jan 2015 14:35:00 +0200</pubDate>
+        <link>http://localhost:4000/2015/01/27/view_vs_feature_specs_what_to_use/</link>
+        <guid isPermaLink="true">http://localhost:4000/2015/01/27/view_vs_feature_specs_what_to_use/</guid>
+        
+        <category>rails</category>
+        
+        <category>rspec</category>
+        
+        <category>testing</category>
+        
+        <category>capybara</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Rails + EmberJS + Active Model Serializers + Her</title>
+        <description>&lt;p&gt;Recently I got into a situation at work, where there was a Rails app, which was exposing some data through an API which uses &lt;a href=&quot;https://github.com/rails-api/active_model_serializers&quot;&gt;active_record_serializers&lt;/a&gt; and &lt;a href=&quot;http://emberjs.com/&quot;&gt;EmberJS&lt;/a&gt; as front-end of the data. The problem was there needed to be a new Rails app, which also consumes data from the same Rails API endpoints and visualize the data. Unfortunatelly &lt;a href=&quot;https://github.com/rails/activeresource&quot;&gt;ActiveResource&lt;/a&gt; and &lt;a href=&quot;https://github.com/remiprev/her&quot;&gt;Her&lt;/a&gt; are not supporting the ember-data kind of data format, which requires to have separate serializers for EmberJS and for regular Rails API calls. So the &lt;a href=&quot;https://github.com/valo/ember_data_active_model_parser&quot;&gt;ember_data_active_model_parser&lt;/a&gt; was born, which is a middleware for Her, which makes it understand the ember-data JSON format.&lt;/p&gt;
+
+&lt;h2 id=&quot;using-emberjs-with-rails&quot;&gt;Using EmberJS with Rails&lt;/h2&gt;
+
+&lt;p&gt;The standard way to hook up EmberJS with a Rails app is to use the active_record_serializers and the &lt;a href=&quot;http://emberjs.com/api/data/classes/DS.ActiveModelAdapter.html&quot;&gt;DS.ActiveModelAdapter&lt;/a&gt;. This causes the JSON responses to look like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// GET /projects/1&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;project&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Shop list&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;task_ids&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;tasks&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;s2&quot;&gt;&quot;completed&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Water&quot;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;s2&quot;&gt;&quot;completed&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Bread&quot;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;As you see the nested resources are specified with their ids and then are serialized at the top level of the JSON. Unfortunately this does not work with ActiveResource or Her if you want to consume this from another Rails app.&lt;/p&gt;
+
+&lt;p&gt;The above output is done with the following serializers:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ProjectSerializer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Serializer&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;embed&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:ids&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;embed_in_root: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:tasks&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TaskSerializer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Serializer&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;embed&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:ids&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;embed_in_root: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:completed&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;consuming-using-her-and-a-custom-parser&quot;&gt;Consuming using Her and a custom parser&lt;/h2&gt;
+
+&lt;p&gt;At this point everything works great, but what about if you want to consume the above REST API from another Rails app? There are several options for an ORM here like &lt;a href=&quot;https://github.com/rails/activeresource&quot;&gt;ActiveResource&lt;/a&gt; and &lt;a href=&quot;https://github.com/remiprev/her&quot;&gt;Her&lt;/a&gt;, but they both don’t understand the above format. Here is what you get using the default Her parsers with the active_model_serializers format:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Her&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;API&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setup&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;url: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://localhost:3000&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Faraday&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;UrlEncoded&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Her&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Middleware&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;DefaultParseJSON&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Faraday&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Adapter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;NetHttp&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Project&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Her&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Model&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;parse_root_in_json&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;format: :active_model_serializers&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:tasks&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Task&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Her&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Model&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;parse_root_in_json&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;format: :active_model_serializers&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:project&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Project&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; #&amp;lt;Project(projects/1) name=&quot;Shop list&quot; task_ids=[2, 8] id=1&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Project&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;tasks&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Exception Her::Errors::ParseError because it tries to access /products/1/tasks&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Wouldn’t it be nice to be able to consume the above API data together with the relations, just like ember-data does? So I wrote a custom parser for Her, which helps Her resolve the relations: &lt;a href=&quot;https://github.com/valo/ember_data_active_model_parser&quot;&gt;ember_data_active_model_parser&lt;/a&gt;. Include the gem in your Gemfile, replace the default JSON parser and you are good to go:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Her&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;API&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setup&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;url: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://localhost:3000&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Faraday&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;UrlEncoded&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# A custom JSON parser&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;EmberDataActiveModelParser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Middleware&lt;/span&gt;
+  
+  &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Faraday&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Adapter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;NetHttp&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Use the same model definitions as the example above&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Project&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; #&amp;lt;Project(projects/1) name=&quot;Shop list&quot; id=1 tasks=[...]&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Project&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;tasks&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; [#&amp;lt;Task(tasks/2) name=&quot;Water&quot; completed=true id=2 project=#&amp;lt;Project(projects/1) name=&quot;Shop list&quot; ...&amp;gt;&amp;gt;, #&amp;lt;Task(tasks/8) name=&quot;Bread&quot; completed=false id=8 project=#&amp;lt;Project(projects/1) name=&quot;Shop list&quot; ...&amp;gt;&amp;gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;example-projects&quot;&gt;Example projects&lt;/h2&gt;
+
+&lt;p&gt;You can checkout the example projects I setup:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Rails app with EmberJS front-end: &lt;a href=&quot;https://github.com/valo/ember_rails_api_example&quot;&gt;ember_rails_api_example&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Rails app which uses Her to consume the data from the first app: &lt;a href=&quot;https://github.com/valo/ember_rails_api_consumer&quot;&gt;ember_rails_api_consumer&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is the first version of the parser, so there is a lot of room for improvement. If you find it useful, please open an issue with any suggestions or bugs you find!&lt;/p&gt;
+</description>
+        <pubDate>Sat, 17 Jan 2015 20:20:14 +0200</pubDate>
+        <link>http://localhost:4000/2015/01/17/rails-plus-emberjs-plus-active-model-serializers-plus-her/</link>
+        <guid isPermaLink="true">http://localhost:4000/2015/01/17/rails-plus-emberjs-plus-active-model-serializers-plus-her/</guid>
+        
+        <category>rails</category>
+        
+        <category>emberjs</category>
+        
+        <category>her</category>
+        
+        <category>soa</category>
+        
+        <category>services</category>
+        
+        <category>json</category>
+        
+        <category>rails api</category>
+        
+        <category>api</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Post with an images</title>
+        <description>&lt;p&gt;A sample post to show how images are being rendered on harmony.&lt;/p&gt;
+
+&lt;h3 id=&quot;image-from-external-host&quot;&gt;Image from external host&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://placekitten.com/g/900/300&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 31 Aug 2014 02:56:45 +0300</pubDate>
+        <link>http://localhost:4000/sample-post-with-images</link>
+        <guid isPermaLink="true">http://localhost:4000/sample-post-with-images</guid>
+        
+        <category>blog</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Making ultra-responsive websites with Rails</title>
+        <description>
+</description>
+        <pubDate>Tue, 25 Mar 2014 18:42:24 +0200</pubDate>
+        <link>http://localhost:4000/2014/03/25/making-ultra-responsive-websites-with-rails/</link>
+        <guid isPermaLink="true">http://localhost:4000/2014/03/25/making-ultra-responsive-websites-with-rails/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Home automation: research and choosing hardware</title>
+        <description>&lt;p&gt;I decided to make a self made home automation system in my apartment. The reason is that I figured out that turning on and off my heating when I am not around reduces my electricity bill by 50%. My current schedule is to turn off the heating when I leave the house and turn it on 1 hour before I come back home. I do the same thing with the heating in my bedroom. The heating there is turned on about an hour before I go to sleep and I turn it off during the day. However there are exceptions from these rules especailly around holidays, so an automation system should also be very configurable.&lt;/p&gt;
+
+&lt;p&gt;So, I decided to automate the above actions with a home automation. My idea is to have a central node, which runs linux and an http server with a simple web app, which I can connect to from my phone/laptop. The web app will allow to send commands to the nodes controlling the heating at home. I will also allow to edit the schedule the heating uses to turn on/off. There will be an arbitrary amount of nodes in the apartment that accept different commands through a wireless protocol and control stuff like radiators, air conditioners, etc. Here is a diagram of the architecture:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/images/home_automation_arch.png&quot; alt=&quot;Home Automation Architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I explored the technologies out there and decided that I won’t use WiFi for internal communication because this is too compex for embedded devices. It turns out there are much simpler and energy efficient protocols for wireless communication like &lt;a href=&quot;http://www.nordicsemi.com/eng/Products/2.4GHz-RF/nRF24L01&quot;&gt;nRF24L01&lt;/a&gt;. This protocol allows to build cheap and power efficient edge nodes, that have the option to run on batteries for months.&lt;/p&gt;
+
+&lt;p&gt;Next I explored the different arduino-like development platforms and decided to go with &lt;a href=&quot;https://www.olimex.com&quot;&gt;Olimex&lt;/a&gt;. Their prices are great and they also provide the UEXT modules, which is essentially breadboarding, but without the need to do any soldering and wiring. I am new to the hardware development, so for now I want to skip any wiring and soldering if possible. After putting all these requirements on the table it turned out that Olimex provide the cheapest solution out there, so I decided to go with them.&lt;/p&gt;
+
+&lt;p&gt;The hardware I decided to use is:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.olimex.com/Products/OLinuXino/A10/A10-OLinuXino-LIME/open-source-hardware&quot;&gt;A10-OLinuXino-LIME&lt;/a&gt; - This is a board similar to raspberry pi, but is a little bit faster and has some goodness, like the posibility for a LiPo backup power, so it can continue to work even after a power outage. You can also attach a SATA hard drive and power it directly from the board. The board also has a UEXT slot, which will allow me to hook up a 2.4GHz RF module to talk to the edge nodes.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.olimex.com/Products/Duino/PIC32/PIC32-PINGUINO-MX220/open-source-hardware&quot;&gt;PIC32-PINGUINO-MX220&lt;/a&gt; - This is a board similar to arduino, but is cheaper and has more memory. It has a connector to hook up to a LiPo battery and UEXT extension slot.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.olimex.com/Products/Modules/Interface/MOD-IRDA+/open-source-hardware&quot;&gt;MOD-IRDA+&lt;/a&gt; - An infra red transcever running on a I2C bus. I2C is a nice bus, because it allows you to have several devices hooked up on the same bus&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.olimex.com/Products/Modules/RF/MOD-NRF24LR/&quot;&gt;MOD-NRF24LR&lt;/a&gt; - This is the 2.4GHz radio module for the wireless communication. It is ultra low power and works with over SPI interface, which is really simple to work with. Much simpler, cheaper and low power, than a full stack WiFi module&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.olimex.com/Products/Modules/IO/MOD-IO2/open-source-hardware&quot;&gt;MOD-IO2&lt;/a&gt; - This is a relay, which allows to control two power outlets. It also runs on the I2C interface.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I decided to use the UEXT sockets to hook up everything. Keep in mind that if you use UEXT you can hook up several I2C devices to the same port. You can also hook up several I2C devices and one SPI device, but you can’t have several SPI devices. This is because SPI does not allow to use the same pins for several devices. I2C allows that, as it is a more comprex protocol with addressing and stuff.&lt;/p&gt;
+
+&lt;p&gt;I ordered the hardware and after 3 days I got everything on the mail:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/images/olimex_delivery.jpg&quot; alt=&quot;Olimex Delivery&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the next blog post I am going to write about setting up the development environment on Mac OS X 10.9 and running my first programs on these boards. Stay tuned!&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Feb 2014 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/2014/02/12/home_automation_research_choosing_hardware/</link>
+        <guid isPermaLink="true">http://localhost:4000/2014/02/12/home_automation_research_choosing_hardware/</guid>
+        
+        <category>home automation</category>
+        
+        <category>pinguino</category>
+        
+        <category>olimex</category>
+        
+        <category>hardware</category>
+        
+        <category>internet of things</category>
+        
+        <category>IoT</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Running Ruby 1.9.1 + Rails + MySQL and unicode characters</title>
+        <description>&lt;p&gt;If you have tried to develop some rails application on Rails + Ruby 1.9.1 and MySQL database and you are storing non-English characters in your database probably you had a lot of pain with errors about incompatible charsets. This is a known problem and there is even &lt;a href=&quot;https://rails.lighthouseapp.com/projects/8994/tickets/2476-ascii-8bit-encoding-of-query-results-in-rails-232-and-ruby-191&quot;&gt;a bug in Rails’ lighthouse&lt;/a&gt; for it. There is even a hack which is going around the issue. The solution is not perfect, but it works in most of the cases.&lt;/p&gt;
+
+&lt;p&gt;The problem in a nutshell is that the MySQL Ruby lib is not respecting the encoding setting defined in the database.yml file and does not encode the strings, that are pulled from the database in that encoding. Here is an example database.yml, which defines the encoding of the database connection:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;    &lt;span class=&quot;s&quot;&gt;development&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;adapter&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mysql&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;database&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;gsm_dev&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;root&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+      &lt;span class=&quot;s&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;utf8&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Fortunately there is a nice solution I found: use the &lt;a href=&quot;http://github.com/tmtm/ruby-mysql&quot; title=&quot;tmtm's ruby-mysql at 2.9 - GitHub&quot;&gt;ruby-mysql&lt;/a&gt; lib. It is on [gemcutter](http://gemcutter.org/ “RubyGems.org&lt;/td&gt;
+      &lt;td&gt;your community gem host”) so you can do:&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;    gem uninstall mysql &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; gem install ruby-mysql&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This is going to uninstall the buggy mysql lib and install the working ruby-mysql. Hope that helps!&lt;/p&gt;
+
+&lt;p&gt;P.S.: I am not sure that this is a production-ready solution, but at least it provides a way to run things without hacks until the MySQL C API is fixed.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 23 Feb 2010 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/2010/02/23/ruby_1_9_1_and_mysql_i18n/</link>
+        <guid isPermaLink="true">http://localhost:4000/2010/02/23/ruby_1_9_1_and_mysql_i18n/</guid>
+        
+        <category>rails</category>
+        
+        <category>ruby 1.9</category>
+        
+        <category>mysql</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

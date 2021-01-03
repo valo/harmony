@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+            var host = 'www.valentinmihov.com';
+            if ((host == window.location.host) && (window.location.protocol != "https:"))
+                window.location.protocol = "https";
+        </script>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Development environment for microservices with docker-compose</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="The personal blog of Valentin Mihov. Mostly technical stuff around software.
+" />
+        <link rel="canonical" href="http://localhost:4000/2015/11/15/microservices-dev-environment-with-docker/" />
+        <meta content="Valentin Mihov's Blog" property="og:site_name">
+
+  <meta content="Development environment for microservices with docker-compose" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="Random pieces of wisdom about technology" property="og:description">
+
+
+  <meta content="http://localhost:4000/2015/11/15/microservices-dev-environment-with-docker/" property="og:url">
+
+
+  <meta content="2015-11-15T00:00:00+02:00" property="article:published_time">
+  <meta content="http://localhost:4000/about/" property="article:author">
+
+
+  <meta content="http://localhost:4000/images/posts/docker-friends.png" property="og:image">
+
+
+  
+
+
+  
+  <meta content="docker" property="article:tag">
+  
+  <meta content="docker-compose" property="article:tag">
+  
+  <meta content="microservices" property="article:tag">
+  
+  <meta content="containers" property="article:tag">
+  
+
+
+        <!-- Harmony styles -->
+        <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/css/anchor.css" />
+
+        <!-- Modernizr js -->
+        <script async src="/assets/js/modernizr.js"></script>
+
+        <!-- IE Fixes -->
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body class="theme-base-01">
+        <header class="main-header">
+            <div class="wc-container">
+                <h1><a href="/">Valentin Mihov's Blog</a></h1>
+                <h2>Random pieces of wisdom about technology</h2>
+                <ul>
+	<li>
+		<a href="http://localhost:4000/about">About</a><span>/</span>
+	</li>
+	<li>
+		<a href="http://localhost:4000/blog">Blog</a><span>/</span>
+	</li>
+	<li>
+		<a title="Valentin Mihov on Github" 
+			href="https://github.com/valo" target="_blank">
+			Github
+		</a><span>/</span>
+	</li>
+</ul>
+
+            </div>
+        </header>
+        <div class="page-content wc-container">
+
+	<div class="post">
+		
+			<img src="http://localhost:4000/images/posts/docker-friends.png" />
+		
+		<h1>Development environment for microservices with docker-compose</h1>
+		<p class="post-meta">
+			
+	    <span class="post-date">
+    	Nov 15, 2015
+	    </span>
+		</p>
+		<div class="post">
+			<p>Developing apps as a set of microservices is getting more and more popular in the recent years. Usually teams decide to adopt this approach as a way to decrease the complexity of their projects. I won’t go into details if this approach is good or bad, but I’m convinced that it has its place in the arsenal of software practices a good engineer should have.</p>
+
+<p>One of the problems I’ve seen with this approach is the increased complexity of running the whole system. This is because with each new microservice, the developer usually needs to run a separate database and/or memcache/redis/rabbitmq/nosql storage. As the number of services grow this becomes a bigger problem (usually anything with more than 2 services is getting quite hard to run and configure). This is especially problematic for new team members that need to run the app and play with it as they need to understand the dependencies of each microservice.</p>
+
+<p>Here I will show you an example how to tackle this problem using <a href="https://docs.docker.com/compose/">docker-compose</a>. In order to make the task easier I will show you how to run a simple app, which needs 5 difference processes to operate (1 app server, 2 storages and 2 background workers). Let’s start.</p>
+
+<h2 id="the-example-app">The example app</h2>
+
+<p>The app we are going to work with is a simplified source code grading system. The idea is that users submit source codes from a web UI, the source codes are stored in a PostgreSQL database and enqueued in a RabbitMQ queue for grading. There is a separate grading service, that reads the enqueued sources codes, calculates the score of each of them and enqueues back the score. Then the frontend reads the scores from RabbitMQ and updates the PostgreSQL database with the scores and the web UI uses this data to show a ranklist of all users.</p>
+
+<p>Each of the apps are developed in a separate git repository. Here are the repos:</p>
+
+<ul>
+  <li>Frontend - a simple sinatra app located here: <a href="https://github.com/valo/example-docker-services-frontend">https://github.com/valo/example-docker-services-frontend</a></li>
+  <li>Grader - a simple background job processor which you can see here: <a href="https://github.com/valo/example-docker-services-grader">https://github.com/valo/example-docker-services-grader</a></li>
+</ul>
+
+<p>Here is a diagram of the microservices and the database storages and how they are connected with each other:</p>
+
+<p><img src="/images/example_docker_services_app.png" alt="png" class="center-image" /></p>
+
+<h2 id="dev-environment-requirements">Dev environment requirements</h2>
+
+<p>We have several requirements for the dev environment so that it is effective and productive:</p>
+
+<ul>
+  <li>It should be possible to run all the apps with a single command</li>
+  <li>When a change is done in the code/templates this should be visible on a page reload</li>
+  <li>It should be possible to run different apps without caring about clashing dependencies or incompatible libs</li>
+</ul>
+
+<p>Basically we should be able to work with several such projects and each of them could be using different version of the same DB. The problem with the live reload is also very important as this is a key feature any developer rely on for fast prototyping.</p>
+
+<h2 id="the-solution---docker-compose">The solution - docker-compose</h2>
+
+<p>Probably you’ve heard about containers, docker and virtualization. These tools could be a viable solution of the above problem. In order to meet the above requirements you need to combine the following things:</p>
+
+<ul>
+  <li><a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">git submodules</a> - it is possible to have a single repository, which has links to the master branches of all microservices you have. Here is an example: <a href="https://github.com/valo/example-docker-services">https://github.com/valo/example-docker-services</a></li>
+  <li>Dockerfile for each microservice - it describes the dependencies of each microservice. Here is an example for the frontend app: <a href="https://github.com/valo/example-docker-services-frontend/blob/master/Dockerfile">https://github.com/valo/example-docker-services-frontend/blob/master/Dockerfile</a></li>
+  <li><a href="https://docs.docker.com/compose/">docker-compose</a> - a tool, which allows to describe the services in your app and the links between them. Here is an example configuration file: <a href="https://github.com/valo/example-docker-services/blob/master/docker-compose.yml">https://github.com/valo/example-docker-services/blob/master/docker-compose.yml</a></li>
+  <li>(optional) <a href="https://github.com/ddollar/foreman">foreman</a> - allows you to run several processes with a single commands. Very useful if you have an app which serves HTTP requests and also has background workers. Here is an example for the frontend app: <a href="https://github.com/valo/example-docker-services-frontend/blob/master/Procfile">https://github.com/valo/example-docker-services-frontend/blob/master/Procfile</a></li>
+</ul>
+
+<h3 id="prerequisites-for-osx">Prerequisites for OSX</h3>
+
+<p>First you need to install <code class="highlighter-rouge">docker</code> and <code class="highlighter-rouge">docker-compose</code>. On OS X I recommend using <a href="http://brew.sh/">homebrew</a> to install all the require dependencies:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>brew install caskroom/cask/brew-cask
+<span class="gp">$ </span>brew cask install virtualbox
+<span class="gp">$ </span>brew install docker-machine docker docker-compose
+<span class="gp">$ </span>docker-machine create --driver virtualbox dev
+<span class="gp">$ </span><span class="nb">eval</span> <span class="k">$(</span>docker-machine env dev<span class="k">)</span></code></pre></figure>
+
+<p>This is going to install VirtualBox, docker-machine, docker and docker-compose and then create a linux VM which will host your docker containers. This is needed because docker can’t run natively on OS X. You can read more about docker-machine from its docs on <a href="https://docs.docker.com/machine/">https://docs.docker.com/machine/</a>.</p>
+
+<p>Keep in mind that the last command will setup the environment for the <code class="highlighter-rouge">docker</code> and <code class="highlighter-rouge">docker-compose</code> command. If you open a new shell you need to run <code class="highlighter-rouge">eval $(docker-machine env dev)</code> again, so that you can control the containers in the VM.</p>
+
+<h3 id="setup">Setup</h3>
+
+<p>You need to make some adjustments to your app, so that you can run it with docker-compose.</p>
+
+<h4 id="use-environment-variables-for-your-config">Use environment variables for your config</h4>
+
+<p>You need to configure your microservices with environment variables. All the links to external services should be configurable from the environment. For example the frontend app allows to set the rabbitMQ and PostgreSQL urls with the environment variables <code class="highlighter-rouge">DATABASE_URL</code> and <code class="highlighter-rouge">AMPQ_ADDRESS</code>. This convention is part of the <a href="http://12factor.net/config">12 factor app</a> manifesto.</p>
+
+<h4 id="create-dockerfile-for-each-microservice">Create Dockerfile for each microservice</h4>
+
+<p>You will need a Dockerfile for each microservice, which allows to run the service in a container. In our app we can use the ruby 2.2 docker image and install any extra gems we need to run the app. Here is an example Dockerfile:</p>
+
+<figure class="highlight"><pre><code class="language-dockerfile" data-lang="dockerfile">FROM ruby:2.2-onbuild
+RUN gem install foreman
+
+COPY . /app
+WORKDIR /app
+
+CMD foreman start</code></pre></figure>
+
+<p>This Dockerfile uses the <a href="https://hub.docker.com/_/ruby/">ruby 2.2 image</a> from docker hub. It installs the <code class="highlighter-rouge">foreman</code> gem, which we need to run the service. Then imports the source code of the project in the <code class="highlighter-rouge">/app</code> folder and sets the working directory there (all commands will be ran in that folder). Finally it runs the service with the <code class="highlighter-rouge">foreman start</code> command, which will boot the webserver and run the background workers.</p>
+
+<h4 id="create-a-git-repo-with-submodules">Create a git repo with submodules</h4>
+
+<p>Usually each of the microservices lives in its own git repository, so it is useful to have a “root” repository, which has links to each service of the app. You can have git submodules that track a given branch of each submodule. You can create these submodules like this:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>git init
+<span class="gp">$ </span>git submodule add -b master git@github.com:valo/example-docker-services-frontend.git
+<span class="gp">$ </span>git submodule add -b master git@github.com:valo/example-docker-services-grader.git
+<span class="gp">$ </span>git commit -m <span class="s2">"Import all microservices as modules"</span></code></pre></figure>
+
+<p>The above commands will create a repository like this one: <a href="https://github.com/valo/example-docker-services">https://github.com/valo/example-docker-services</a></p>
+
+<h4 id="define-a-docker-compose-config">Define a docker-compose config</h4>
+
+<p>Finally you need a <code class="highlighter-rouge">docker-compose</code> config, which describes all services and their dependencies. Here is the config for the app that we have:</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="s">frontend</span><span class="pi">:</span>
+  <span class="s">build</span><span class="pi">:</span> <span class="s">./example-docker-services-frontend</span>
+  <span class="s">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">4567:4567"</span>
+  <span class="s">links</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">rabbitmq</span>
+    <span class="pi">-</span> <span class="s">postgres</span>
+  <span class="s">environment</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">AMPQ_ADDRESS=amqp://rabbitmq:5672</span>
+    <span class="pi">-</span> <span class="s">DATABASE_URL=postgres://postgres:mysecretpassword@postgres:5432</span>
+  <span class="s">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">./example-docker-services-frontend/:/app</span>
+
+<span class="s">grader</span><span class="pi">:</span>
+  <span class="s">build</span><span class="pi">:</span> <span class="s">./example-docker-services-grader</span>
+  <span class="s">links</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">rabbitmq</span>
+  <span class="s">environment</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">AMPQ_ADDRESS=amqp://rabbitmq:5672</span>
+  <span class="s">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">./example-docker-services-grader/:/app</span>
+
+<span class="s">rabbitmq</span><span class="pi">:</span>
+  <span class="s">image</span><span class="pi">:</span> <span class="s">rabbitmq</span>
+  <span class="s">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">5672</span>
+
+<span class="s">postgres</span><span class="pi">:</span>
+  <span class="s">image</span><span class="pi">:</span> <span class="s">postgres:latest</span>
+  <span class="s">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">5432</span>
+  <span class="s">environment</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">POSTGRES_PASSWORD=mysecretpassword</span>
+    <span class="pi">-</span> <span class="s">POSTGRES_USER=postgres</span></code></pre></figure>
+
+<p>There are several important parts in this config. There is a root element for each service (frontend, grader, rabbitmq and postgresql). Each of these services can be referenced in the <code class="highlighter-rouge">environment</code> section, so that we can link services together. You can see how the <code class="highlighter-rouge">rabbitmq</code> service is referenced in the <code class="highlighter-rouge">AMPQ_ADDRESS</code> variable.</p>
+
+<p>It is also very important to link the local folders with <code class="highlighter-rouge">volumes</code> sections. This provides the “auto-reload” functionality, as the files in the container are going to be updates as you change them locally.</p>
+
+<h4 id="putting-it-all-together">Putting it all together</h4>
+
+<p>Finally after you have all this setup, you can run all the services by just running:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>git clone git@github.com:valo/example-docker-services.git
+<span class="gp">$ </span><span class="nb">cd </span>example-docker-services
+<span class="gp">$ </span>docker-compose up</code></pre></figure>
+
+<p>And then to open the frontend application you can run:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>open http://<span class="k">$(</span>docker-machine ip dev<span class="k">)</span>:4567</code></pre></figure>
+
+<h4 id="running-setup-commands">Running setup commands</h4>
+
+<p>Most of the time you need to run some commands to setup the DB, import data, etc. You can do that like this:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>docker-compose run frontend bundle <span class="nb">exec </span>rake db:migrate db:seed</code></pre></figure>
+
+<p>Essenatially you need to prefix each command with <code class="highlighter-rouge">docker-compose run &lt;service_name&gt;</code>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Using <code class="highlighter-rouge">docker-compose</code> is a great way to run multiple services in an easy and reproducible way. There are a lot of details around this tool, but I think the example project here will give you a good foundation to migrate your complex app to a more managable setup.</p>
+
+
+			<div class="share-page">
+			    Share this on &rarr;
+			    <a href="https://twitter.com/intent/tweet?text=Development+environment+for+microservices+with+docker-compose&amp;url=http%3A%2F%2Flocalhost%3A4000%2F2015%2F11%2F15%2Fmicroservices-dev-environment-with-docker%2F&amp;via=valentinmihov&amp;related=valentinmihov" rel="nofollow" target="_blank" title="Share on Twitter">Twitter</a>
+			    <a href="https://facebook.com/sharer.php?u=http://localhost:4000/2015/11/15/microservices-dev-environment-with-docker/" rel="nofollow" target="_blank" title="Share on Facebook">Facebook</a>
+			    <a href="https://plus.google.com/share?url=http://localhost:4000/2015/11/15/microservices-dev-environment-with-docker/" rel="nofollow" target="_blank" title="Share on Google+">Google+</a>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="related">
+		<h4>Related Posts</h2>
+		<ul class="posts">
+		    
+		    <li>
+			  <span>12 Sep 2016 &raquo;</span>
+			  <a href="http://localhost:4000/2016/09/12/fullstackfest-2016-recap/">Full Stack Fest 2016 Recap</a>
+		    </li>
+		    
+		    <li>
+			  <span>24 Apr 2015 &raquo;</span>
+			  <a href="http://localhost:4000/2015/04/24/aws-machine-learning-overview/">AWS Machine Learning Overview</a>
+		    </li>
+		    
+		    <li>
+			  <span>17 Apr 2015 &raquo;</span>
+			  <a href="http://localhost:4000/2015/04/17/adult-income-data-set/">Adult Income Data Set Analysis with IPython</a>
+		    </li>
+		    
+		</ul>
+	</div>
+	
+
+	<div class="comments">
+		
+
+<button class="show-comments">Load Disqus comments</button>
+
+<div id="disqus_thread"></div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.show-comments').on('click', function(){
+          var disqus_shortname = 'valentinmihov'; // Replace this value with *your* username.
+
+          var d = document, s = d.createElement('script');
+
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+
+          // hide the button once comments load
+          $(this).fadeOut();
+    });
+});
+</script>
+
+
+	</div>
+
+	<div class="post-footer">
+		<div class="column-1">
+			
+				<a href="http://localhost:4000/2015/04/24/aws-machine-learning-overview/"><< Older</a>
+			
+		</div>
+		<div class="column-2"><a href="http://localhost:4000/ ">Home</a></div>
+		<div class="column-3">
+			
+				<a href="http://localhost:4000/2016/09/12/fullstackfest-2016-recap/">Newer >></a>
+			
+		</div>
+	</div>
+</div>
+
+        <footer class="main-footer">
+            <div class="wc-container">
+                <div class="column one">
+                    <h6>Few more links</h6>
+<ul class="menu">
+    <li><a href="http://localhost:4000/about">About</a></li>
+    <li><a href="http://localhost:4000/blog">Blog</a></li>
+</ul>		
+
+                </div>
+                <div class="column two">
+                    <h6>Follow me</h6>
+
+<ul class="social-media">
+
+
+    
+    <li>
+        <a title="valentinmihov on Twitter"
+            href="https://twitter.com/valentinmihov"
+            class="twitter wc-img-replace" target="_blank">Twitter</a>
+    </li>
+    
+
+    
+    <li>
+        <a title="valo on Github"
+            href="https://github.com/valo"
+            class="github wc-img-replace" target="_blank">Github</a>
+    </li>
+    
+
+    
+    <li>
+        <a title="valentin.mihov1 on Facebook"
+            href="https://facebook.com/valentin.mihov1"
+            class="facebook wc-img-replace" target="_blank">Facebook</a>
+    </li>
+    
+
+    
+    <li>
+        <a title="+ValentinMihov on Google Plus"
+            href="https://plus.google.com/+ValentinMihov"
+            class="google wc-img-replace" target="_blank">Google</a>
+    </li>
+    
+
+    
+
+    
+
+</ul>
+
+                </div>
+            </div>
+            <p class="wc-container disclaimer">
+                
+	Everything you find here under Creative Commons CC0.         
+
+Powered by <a href="http://jekyllrb.com" target="_blank">Jekyll</a>
+            </p>
+        </footer>
+        <script type="text/javascript">
+          /* To avoid render blocking css */
+          var cb = function() {
+            var l = document.createElement('link'); l.rel = 'stylesheet';
+            l.href = '//fonts.googleapis.com/css?family=Ubuntu+Mono&subset=latin';
+            var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+          };
+          var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+              webkitRequestAnimationFrame || msRequestAnimationFrame;
+          if (raf) raf(cb);
+          else window.addEventListener('load', cb);
+        </script>
+        <!-- jQuery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- When no internet load JQuery from local -->
+        <script>window.jQuery || document.write('<script src="/assets/js/jquery.min.js"><\/script>')</script>
+        <!-- Site js -->
+        <script src="/assets/js/anchor.min.js"></script>
+        <script src="/assets/js/all.js"></script>
+        <!-- Google analytics  -->
+        
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-9529494-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+    </body>
+</html>

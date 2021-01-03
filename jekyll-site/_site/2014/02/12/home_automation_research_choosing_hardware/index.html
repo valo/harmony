@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+            var host = 'www.valentinmihov.com';
+            if ((host == window.location.host) && (window.location.protocol != "https:"))
+                window.location.protocol = "https";
+        </script>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Home automation: research and choosing hardware</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="The personal blog of Valentin Mihov. Mostly technical stuff around software.
+" />
+        <link rel="canonical" href="http://localhost:4000/2014/02/12/home_automation_research_choosing_hardware/" />
+        <meta content="Valentin Mihov's Blog" property="og:site_name">
+
+  <meta content="Home automation: research and choosing hardware" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="Random pieces of wisdom about technology" property="og:description">
+
+
+  <meta content="http://localhost:4000/2014/02/12/home_automation_research_choosing_hardware/" property="og:url">
+
+
+  <meta content="2014-02-12T00:00:00+02:00" property="article:published_time">
+  <meta content="http://localhost:4000/about/" property="article:author">
+
+
+  <meta content="http://localhost:4000/images/87173a37d2b301a20a55ac042aaf6444.jpg" property="og:image">
+
+
+  
+
+
+  
+  <meta content="home automation" property="article:tag">
+  
+  <meta content="pinguino" property="article:tag">
+  
+  <meta content="olimex" property="article:tag">
+  
+  <meta content="hardware" property="article:tag">
+  
+  <meta content="internet of things" property="article:tag">
+  
+  <meta content="IoT" property="article:tag">
+  
+
+
+        <!-- Harmony styles -->
+        <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/css/anchor.css" />
+
+        <!-- Modernizr js -->
+        <script async src="/assets/js/modernizr.js"></script>
+
+        <!-- IE Fixes -->
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body class="theme-base-01">
+        <header class="main-header">
+            <div class="wc-container">
+                <h1><a href="/">Valentin Mihov's Blog</a></h1>
+                <h2>Random pieces of wisdom about technology</h2>
+                <ul>
+	<li>
+		<a href="http://localhost:4000/about">About</a><span>/</span>
+	</li>
+	<li>
+		<a href="http://localhost:4000/blog">Blog</a><span>/</span>
+	</li>
+	<li>
+		<a title="Valentin Mihov on Github" 
+			href="https://github.com/valo" target="_blank">
+			Github
+		</a><span>/</span>
+	</li>
+</ul>
+
+            </div>
+        </header>
+        <div class="page-content wc-container">
+
+	<div class="post">
+		
+		<h1>Home automation: research and choosing hardware</h1>
+		<p class="post-meta">
+			
+	    <span class="post-date">
+    	Feb 12, 2014
+	    </span>
+		</p>
+		<div class="post">
+			<p>I decided to make a self made home automation system in my apartment. The reason is that I figured out that turning on and off my heating when I am not around reduces my electricity bill by 50%. My current schedule is to turn off the heating when I leave the house and turn it on 1 hour before I come back home. I do the same thing with the heating in my bedroom. The heating there is turned on about an hour before I go to sleep and I turn it off during the day. However there are exceptions from these rules especailly around holidays, so an automation system should also be very configurable.</p>
+
+<p>So, I decided to automate the above actions with a home automation. My idea is to have a central node, which runs linux and an http server with a simple web app, which I can connect to from my phone/laptop. The web app will allow to send commands to the nodes controlling the heating at home. I will also allow to edit the schedule the heating uses to turn on/off. There will be an arbitrary amount of nodes in the apartment that accept different commands through a wireless protocol and control stuff like radiators, air conditioners, etc. Here is a diagram of the architecture:</p>
+
+<p><img src="http://localhost:4000/images/home_automation_arch.png" alt="Home Automation Architecture" /></p>
+
+<p>I explored the technologies out there and decided that I won’t use WiFi for internal communication because this is too compex for embedded devices. It turns out there are much simpler and energy efficient protocols for wireless communication like <a href="http://www.nordicsemi.com/eng/Products/2.4GHz-RF/nRF24L01">nRF24L01</a>. This protocol allows to build cheap and power efficient edge nodes, that have the option to run on batteries for months.</p>
+
+<p>Next I explored the different arduino-like development platforms and decided to go with <a href="https://www.olimex.com">Olimex</a>. Their prices are great and they also provide the UEXT modules, which is essentially breadboarding, but without the need to do any soldering and wiring. I am new to the hardware development, so for now I want to skip any wiring and soldering if possible. After putting all these requirements on the table it turned out that Olimex provide the cheapest solution out there, so I decided to go with them.</p>
+
+<p>The hardware I decided to use is:</p>
+
+<ul>
+  <li><a href="https://www.olimex.com/Products/OLinuXino/A10/A10-OLinuXino-LIME/open-source-hardware">A10-OLinuXino-LIME</a> - This is a board similar to raspberry pi, but is a little bit faster and has some goodness, like the posibility for a LiPo backup power, so it can continue to work even after a power outage. You can also attach a SATA hard drive and power it directly from the board. The board also has a UEXT slot, which will allow me to hook up a 2.4GHz RF module to talk to the edge nodes.</li>
+  <li><a href="https://www.olimex.com/Products/Duino/PIC32/PIC32-PINGUINO-MX220/open-source-hardware">PIC32-PINGUINO-MX220</a> - This is a board similar to arduino, but is cheaper and has more memory. It has a connector to hook up to a LiPo battery and UEXT extension slot.</li>
+  <li><a href="https://www.olimex.com/Products/Modules/Interface/MOD-IRDA+/open-source-hardware">MOD-IRDA+</a> - An infra red transcever running on a I2C bus. I2C is a nice bus, because it allows you to have several devices hooked up on the same bus</li>
+  <li><a href="https://www.olimex.com/Products/Modules/RF/MOD-NRF24LR/">MOD-NRF24LR</a> - This is the 2.4GHz radio module for the wireless communication. It is ultra low power and works with over SPI interface, which is really simple to work with. Much simpler, cheaper and low power, than a full stack WiFi module</li>
+  <li><a href="https://www.olimex.com/Products/Modules/IO/MOD-IO2/open-source-hardware">MOD-IO2</a> - This is a relay, which allows to control two power outlets. It also runs on the I2C interface.</li>
+</ul>
+
+<p>I decided to use the UEXT sockets to hook up everything. Keep in mind that if you use UEXT you can hook up several I2C devices to the same port. You can also hook up several I2C devices and one SPI device, but you can’t have several SPI devices. This is because SPI does not allow to use the same pins for several devices. I2C allows that, as it is a more comprex protocol with addressing and stuff.</p>
+
+<p>I ordered the hardware and after 3 days I got everything on the mail:</p>
+
+<p><img src="http://localhost:4000/images/olimex_delivery.jpg" alt="Olimex Delivery" /></p>
+
+<p>In the next blog post I am going to write about setting up the development environment on Mac OS X 10.9 and running my first programs on these boards. Stay tuned!</p>
+
+
+			<div class="share-page">
+			    Share this on &rarr;
+			    <a href="https://twitter.com/intent/tweet?text=Home+automation%3A+research+and+choosing+hardware&amp;url=http%3A%2F%2Flocalhost%3A4000%2F2014%2F02%2F12%2Fhome_automation_research_choosing_hardware%2F&amp;via=valentinmihov&amp;related=valentinmihov" rel="nofollow" target="_blank" title="Share on Twitter">Twitter</a>
+			    <a href="https://facebook.com/sharer.php?u=http://localhost:4000/2014/02/12/home_automation_research_choosing_hardware/" rel="nofollow" target="_blank" title="Share on Facebook">Facebook</a>
+			    <a href="https://plus.google.com/share?url=http://localhost:4000/2014/02/12/home_automation_research_choosing_hardware/" rel="nofollow" target="_blank" title="Share on Google+">Google+</a>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="related">
+		<h4>Related Posts</h2>
+		<ul class="posts">
+		    
+		    <li>
+			  <span>12 Sep 2016 &raquo;</span>
+			  <a href="http://localhost:4000/2016/09/12/fullstackfest-2016-recap/">Full Stack Fest 2016 Recap</a>
+		    </li>
+		    
+		    <li>
+			  <span>15 Nov 2015 &raquo;</span>
+			  <a href="http://localhost:4000/2015/11/15/microservices-dev-environment-with-docker/">Development environment for microservices with docker-compose</a>
+		    </li>
+		    
+		    <li>
+			  <span>24 Apr 2015 &raquo;</span>
+			  <a href="http://localhost:4000/2015/04/24/aws-machine-learning-overview/">AWS Machine Learning Overview</a>
+		    </li>
+		    
+		</ul>
+	</div>
+	
+
+	<div class="comments">
+		
+
+<button class="show-comments">Load Disqus comments</button>
+
+<div id="disqus_thread"></div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.show-comments').on('click', function(){
+          var disqus_shortname = 'valentinmihov'; // Replace this value with *your* username.
+
+          var d = document, s = d.createElement('script');
+
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+
+          // hide the button once comments load
+          $(this).fadeOut();
+    });
+});
+</script>
+
+
+	</div>
+
+	<div class="post-footer">
+		<div class="column-1">
+			
+				<a href="http://localhost:4000/2010/02/23/ruby_1_9_1_and_mysql_i18n/"><< Older</a>
+			
+		</div>
+		<div class="column-2"><a href="http://localhost:4000/ ">Home</a></div>
+		<div class="column-3">
+			
+				<a href="http://localhost:4000/2014/03/25/making-ultra-responsive-websites-with-rails/">Newer >></a>
+			
+		</div>
+	</div>
+</div>
+
+        <footer class="main-footer">
+            <div class="wc-container">
+                <div class="column one">
+                    <h6>Few more links</h6>
+<ul class="menu">
+    <li><a href="http://localhost:4000/about">About</a></li>
+    <li><a href="http://localhost:4000/blog">Blog</a></li>
+</ul>		
+
+                </div>
+                <div class="column two">
+                    <h6>Follow me</h6>
+
+<ul class="social-media">
+
+
+    
+    <li>
+        <a title="valentinmihov on Twitter"
+            href="https://twitter.com/valentinmihov"
+            class="twitter wc-img-replace" target="_blank">Twitter</a>
+    </li>
+    
+
+    
+    <li>
+        <a title="valo on Github"
+            href="https://github.com/valo"
+            class="github wc-img-replace" target="_blank">Github</a>
+    </li>
+    
+
+    
+    <li>
+        <a title="valentin.mihov1 on Facebook"
+            href="https://facebook.com/valentin.mihov1"
+            class="facebook wc-img-replace" target="_blank">Facebook</a>
+    </li>
+    
+
+    
+    <li>
+        <a title="+ValentinMihov on Google Plus"
+            href="https://plus.google.com/+ValentinMihov"
+            class="google wc-img-replace" target="_blank">Google</a>
+    </li>
+    
+
+    
+
+    
+
+</ul>
+
+                </div>
+            </div>
+            <p class="wc-container disclaimer">
+                
+	Everything you find here under Creative Commons CC0.         
+
+Powered by <a href="http://jekyllrb.com" target="_blank">Jekyll</a>
+            </p>
+        </footer>
+        <script type="text/javascript">
+          /* To avoid render blocking css */
+          var cb = function() {
+            var l = document.createElement('link'); l.rel = 'stylesheet';
+            l.href = '//fonts.googleapis.com/css?family=Ubuntu+Mono&subset=latin';
+            var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+          };
+          var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+              webkitRequestAnimationFrame || msRequestAnimationFrame;
+          if (raf) raf(cb);
+          else window.addEventListener('load', cb);
+        </script>
+        <!-- jQuery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- When no internet load JQuery from local -->
+        <script>window.jQuery || document.write('<script src="/assets/js/jquery.min.js"><\/script>')</script>
+        <!-- Site js -->
+        <script src="/assets/js/anchor.min.js"></script>
+        <script src="/assets/js/all.js"></script>
+        <!-- Google analytics  -->
+        
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-9529494-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+            var host = 'www.valentinmihov.com';
+            if ((host == window.location.host) && (window.location.protocol != "https:"))
+                window.location.protocol = "https";
+        </script>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Full Stack Fest 2016 Recap</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="The personal blog of Valentin Mihov. Mostly technical stuff around software.
+" />
+        <link rel="canonical" href="http://localhost:4000/2016/09/12/fullstackfest-2016-recap/" />
+        <meta content="Valentin Mihov's Blog" property="og:site_name">
+
+  <meta content="Full Stack Fest 2016 Recap" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="Random pieces of wisdom about technology" property="og:description">
+
+
+  <meta content="http://localhost:4000/2016/09/12/fullstackfest-2016-recap/" property="og:url">
+
+
+  <meta content="2016-09-12T00:00:00+03:00" property="article:published_time">
+  <meta content="http://localhost:4000/about/" property="article:author">
+
+
+  <meta content="http://localhost:4000/images/posts/full-stack-fest.png" property="og:image">
+
+
+  
+
+
+  
+  <meta content="fullstackfest" property="article:tag">
+  
+  <meta content="opensource" property="article:tag">
+  
+  <meta content="conference" property="article:tag">
+  
+  <meta content="barcelona" property="article:tag">
+  
+
+
+        <!-- Harmony styles -->
+        <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/css/anchor.css" />
+
+        <!-- Modernizr js -->
+        <script async src="/assets/js/modernizr.js"></script>
+
+        <!-- IE Fixes -->
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body class="theme-base-01">
+        <header class="main-header">
+            <div class="wc-container">
+                <h1><a href="/">Valentin Mihov's Blog</a></h1>
+                <h2>Random pieces of wisdom about technology</h2>
+                <ul>
+	<li>
+		<a href="http://localhost:4000/about">About</a><span>/</span>
+	</li>
+	<li>
+		<a href="http://localhost:4000/blog">Blog</a><span>/</span>
+	</li>
+	<li>
+		<a title="Valentin Mihov on Github" 
+			href="https://github.com/valo" target="_blank">
+			Github
+		</a><span>/</span>
+	</li>
+</ul>
+
+            </div>
+        </header>
+        <div class="page-content wc-container">
+
+	<div class="post">
+		
+			<img src="http://localhost:4000/images/posts/full-stack-fest.png" />
+		
+		<h1>Full Stack Fest 2016 Recap</h1>
+		<p class="post-meta">
+			
+	    <span class="post-date">
+    	Sep 12, 2016
+	    </span>
+		</p>
+		<div class="post">
+			<p>I few days ago I attended the <a href="https://2016.fullstackfest.com/">Full Stack Fest</a> in Barcelona. It was a great conference and I really enjoyed the way it was organized and the talks that I watched. Great thanks to the organizers <a href="http://www.codegram.com/">codegram</a> and to <a href="https://www.airhelp.com/en/">AirHelp</a> for sponsoring my attendance. I tried to keep notes during the conference about interesting ideas and projects, so this blog post is a recap of what I learned from the conference.</p>
+
+<h2 id="computing-the-first-100-years">Computing: The first 100 years</h2>
+
+<p>One of the interesting facts from this talk was that iPhone 6 has the processing power of 16 Cray-1 super-computers from the 1975. Great for playing Pokemon Go, as <a href="https://twitter.com/joeerl">Joe Armstrong</a> said in the talk. Some more information in this infographic: <a href="http://pages.experts-exchange.com/processing-power-compared/">Processing Power Compared</a>.</p>
+
+<h2 id="unikernels-and-why-theyre-useful-or-not">Unikernels and why they’re useful (or not)</h2>
+
+<p>Generally the idea about the unikernels is a very interesting one. I had the opportunity to chat for an hour with <a href="https://twitter.com/amirmc">Amir Chaudhry</a> and it turns out that the technology around unikernels is quite ahead and it is something, which Docker is investing resources into. I would expect we start to see them used more and more in the following years.</p>
+
+<p>If you are wondering what is a unikernel, you can think about it as compiling your app together with all the required pieces of the OS into one bundle. The benefit will be:</p>
+
+<ul>
+  <li>Smaller size of the application containers</li>
+  <li>Smaller attack surface for possible exploits</li>
+</ul>
+
+<h2 id="what-did-alphago-do-to-beat-the-strongest-human-go-player">What did AlphaGo do to beat the strongest human Go player?</h2>
+
+<p>This was the most interesting machine learning talk for me. I haven’t read details how exactly was the AlphaGo implemented and the talk gave a nice overview of that. The whole algorithm is a combination between neural networks and <a href="https://en.wikipedia.org/wiki/Monte_Carlo_tree_search">Monte Carlo tree search</a>. A very interesting idea emerged from this talk for me and this is to use neural networks to implement human “intuition”. It is all pattern matching at the end and the idea of using neural networks for that is not new, but thinking about a trained network as an implementation of human intuition looks really nice to me.</p>
+
+<h2 id="how-secure-are-docker-containers">How secure are Docker containers?</h2>
+
+<p>A very interesting talk! Several things I didn’t know about docker from it:</p>
+
+<ul>
+  <li>the <code class="highlighter-rouge">--pids-limit</code> flag, which limits the number of processes in the container. An easy way to prevent fork-bombs. The default is -1 (unlimited)</li>
+  <li>the <code class="highlighter-rouge">--read-only</code> flag, which mounts the root FS in the container as read only. Very useful if you want to make sure a container is not writing on the FS (and creating additional layers and stuff)</li>
+  <li>limiting the systems calls in a container using <a href="https://github.com/docker/docker/blob/master/docs/security/seccomp.md">seccomp</a>. Comes with a performance penalty, so be cautious.</li>
+  <li><a href="http://dockerbench.com/">http://dockerbench.com/</a> is a docker container, which checks for dozens of common best-practices around deploying Docker containers in production. Haven’t tried it, but looks very interesting.</li>
+</ul>
+
+<p>Finally a thing not directly connected to docker, but very relevant for security: the <a href="https://www.shodan.io/">Shodan</a> search engine. It indexes the servers around Internet and allows you to find machines, that reply in a certain way on some port. Very useful for hackers to find unprotected docker machines, for example. The bottomline - secure your services, as hackers will certainly find you!</p>
+
+<h2 id="microservice-pipeline-architecture">Microservice Pipeline Architecture</h2>
+
+<p>This was a talk about the BBC website, which is basically a precomputed cache, which is updated on each update of the content. They are open sourcing their system, so it is worth having a look at it: <a href="https://github.com/BBC-News/alephant">alephant</a>.</p>
+
+<h2 id="building-a-recommendation-engine-with-machine-learning-techniques">Building a Recommendation Engine with Machine Learning Techniques</h2>
+
+<p>If you’ve done machine learning this talk would probably have been a bit basic to you. It was a kind of introduction to machine learning and how to approach learning about it. I took one interesting project out of it: <a href="https://rapidminer.com/">RapidMiner</a>. Looks like an IDE for doing machine learning. Seems quite pricey if you handle non-trivial amount of data, but might be a nice resource for novices to learn the basics.</p>
+
+<h2 id="the-future-of-es6">The future of ES6</h2>
+
+<p>This talk gave an interesting insight how the JavaScript is evolving as a language. Each proposal goes through several stages as it matures. If the feature is not working well it is abandoned. For example here are all <a href="https://github.com/tc39/proposals/blob/master/stage-0-proposals.md">Stage 0 proposals</a> and here are the more evolved <a href="https://github.com/tc39/proposals">Stage 1+ proposals</a>. Also one can follow the discussion about the feature on the <a href="https://esdiscuss.org/">ES Discuss website</a>.</p>
+
+<h2 id="best-practices-on-building-a-ui-component-library-for-your-company">Best Practices on building a UI component library for your company</h2>
+
+<p>I really liked this talk as it describes something, which I believe more and more companies are going to adopt in their front-end workflow: reusable, isolated HTML+CSS components. <a href="https://twitter.com/DavidWells">David Wells</a> described a nice workflow how to build such a component library using best practices and technologies. He mentioned some existing component libraries that are worth exploring:</p>
+
+<ul>
+  <li><a href="http://lightningdesignsystem.com/">Lightning Design System</a> from Salesforce</li>
+  <li><a href="http://ux.mulesoft.com/#/">MuleSoft Components</a> which are based on ReactJS</li>
+  <li><a href="http://bradfrost.com/blog/post/atomic-web-design/">Atomic Design</a>, which is the philosophy on which all these component libraries are based on</li>
+  <li>And finally a list of <a href="http://davidwells.io/19-open-source-react-component-libraries-to-use-in-your-next-project/">19 Open Source React Component Libraries to use in your next project</a> which covers some more</li>
+</ul>
+
+<p>In order to build a component library, which provides truly isolated components (the CSS of one component does not impact the CSS of the others), <a href="https://github.com/postcss/postcss">PostCSS</a> is used. Looks like a very useful project that I will definitely check out. There is a talk from David Wells on the topic: <a href="https://vimeo.com/173122870">Bulletproof CSS in React</a>. I am using such CSS namespacing on the projects I work on now, but one thing that I am not doing to resetting all inherited properties of the components, which ensures true isolation. There is a plugin for PostCSS, which does that.</p>
+
+<p>One thing was mentioned in the talk, that I haven’t thought about: font icons are inferior to SVG icons, because they can be only 1 color. Here is an example from <a href="http://lightningdesignsystem.com/icons/">Lightning Design System</a> which shows how cool multicolor icons can look like. SVG icons seems to be the future.</p>
+
+<p>During the talk a very interesting project was mentioned: <a href="https://phenomic.io/">Phenomic</a>. It allows to generate static HTML websites from ReactJS projects. The sites will work as static if there is no JavaScript enabled, but if JS is enabled they will load as static and provide a dynamic UX.</p>
+
+<h2 id="see-the-data-flowing-through-your-app">See the data flowing through your app</h2>
+
+<p>This was a talk about building front-end apps using reactive programming. <a href="https://twitter.com/andrestaltz">André Staltz</a> made a great opening of his talk with some special effects and definitely took the attention of the audience. He showed what it looks like to build apps using <a href="http://cycle.js.org/">Cycle.js</a>. Seems like a very promising technology. Worth to mention that it has a very nice Chrome plugin, which allows you to see how the data is flowing through your app.</p>
+
+<h2 id="how-to-build-a-website-that-will-eventually-work-on-mars">How to build a website that will (eventually) work on Mars?</h2>
+
+<p>So here is a talk with quite a bombastic title. It was discussing various aspects of the data transfer between planets, which are mainly caused by the speed of light. Some interesting projects mentioned during the talk:</p>
+
+<ul>
+  <li><a href="https://pouchdb.com/">PouchDB</a> is a DB which runs within your browser, so you can store data locally while your app is offline and sync it when it goes online again</li>
+  <li><a href="https://github.com/mafintosh/hyperdrive">Hyperdrive</a> is a peer to peer data distribution protocol written in JS</li>
+  <li><a href="https://ipfs.io/">IPFS</a> is a peer-to-peer hypermedia protocol, which allows to have a distributed web. Might be the way to handle content efficiently between planets, where each planet will have a local version of the global web, which is synchronized on demand.</li>
+</ul>
+
+<h2 id="reactive-reality--virtual-reality-is-here-in-your-browser">Reactive Reality &amp; Virtual Reality is Here, in your Browser</h2>
+
+<p>These were two talks about virtual reality in the web. Looks like an early stage technology with some interesting potential use cases. The projects mentioned:</p>
+
+<ul>
+  <li><a href="http://konvajs.github.io/">Konva</a> is a library for drawing on html5 canvas</li>
+  <li><a href="https://github.com/lavrton/react-konva">React Konva</a> allows to use Konva with the ReactJS</li>
+  <li><a href="https://aframe.io/">A-frame</a> is a JS framework for building VR worlds for the web</li>
+</ul>
+
+<h2 id="the-physical-web-building-on-top-of-the-open-web">The Physical Web: building on top of the open web</h2>
+
+<p>I was totally blown away by this talk from <a href="https://twitter.com/scottjenson">Scott Jenson</a>. The Physical Web essentially allows you to put a small beacon in some physical object and transmit an URL using BLE. This is a very powerful concept, as it allows to interact with objects around you without the need of downloading a mobile app. For example you can approach a parking meter, see its URL, open it and pay for your parking without installing an app. Or approach a monument, open its URL and read more about it. Or have a box of pills, which broadcasts an URL, on which you can monitor when you need to take your medication and once you access it, receive push notifications when you need to take the next dose. The possibilities are endless, so I urge you to read more about <a href="https://google.github.io/physical-web/">Physical Web</a> and tell people around you more about it. This simple technology looks like a peek in the future.</p>
+
+<h2 id="final-words">Final words</h2>
+
+<p>There are some technologies I didn’t mention above, where were a recurring topic during the conference. These you probably have heard of and it seems they are getting wider adoption:</p>
+
+<ul>
+  <li><a href="https://facebook.github.io/react/">ReactJS</a> - most of the front-end talks were somehow connected to React. Even the VR talks were using ReactJS for rendering</li>
+  <li><a href="https://github.com/facebook/graphql">GraphQL</a> was mentioned a lot. The main reason are the mobile networks and the high latency they have, which makes accessing websites that make many HTTP requests a pain. HTTP/2 is going to fix that for the assets, but for the server side data, GraphQL seems to be the answer</li>
+  <li><a href="https://facebook.github.io/relay/">Facebook Relay</a> was also mentioned. It is a technology which steps on ReactJS and GraphQL and allows you to describe the data each component needs in isolation. Then the framework assembles the query, which needs to be sent to the server. Still in development, but seems like a nice approach, especially for bigger apps with a lot of components and devs working on them.</li>
+</ul>
+
+<p>Generally I really liked the conference and Barcelona as a hosting city, so I will definitely try to come back next year. I have a big list of technologies to read about and play with. Hope I will have enough time to go through everything until next year ;-).</p>
+
+
+			<div class="share-page">
+			    Share this on &rarr;
+			    <a href="https://twitter.com/intent/tweet?text=Full+Stack+Fest+2016+Recap&amp;url=http%3A%2F%2Flocalhost%3A4000%2F2016%2F09%2F12%2Ffullstackfest-2016-recap%2F&amp;via=valentinmihov&amp;related=valentinmihov" rel="nofollow" target="_blank" title="Share on Twitter">Twitter</a>
+			    <a href="https://facebook.com/sharer.php?u=http://localhost:4000/2016/09/12/fullstackfest-2016-recap/" rel="nofollow" target="_blank" title="Share on Facebook">Facebook</a>
+			    <a href="https://plus.google.com/share?url=http://localhost:4000/2016/09/12/fullstackfest-2016-recap/" rel="nofollow" target="_blank" title="Share on Google+">Google+</a>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="related">
+		<h4>Related Posts</h2>
+		<ul class="posts">
+		    
+		    <li>
+			  <span>15 Nov 2015 &raquo;</span>
+			  <a href="http://localhost:4000/2015/11/15/microservices-dev-environment-with-docker/">Development environment for microservices with docker-compose</a>
+		    </li>
+		    
+		    <li>
+			  <span>24 Apr 2015 &raquo;</span>
+			  <a href="http://localhost:4000/2015/04/24/aws-machine-learning-overview/">AWS Machine Learning Overview</a>
+		    </li>
+		    
+		    <li>
+			  <span>17 Apr 2015 &raquo;</span>
+			  <a href="http://localhost:4000/2015/04/17/adult-income-data-set/">Adult Income Data Set Analysis with IPython</a>
+		    </li>
+		    
+		</ul>
+	</div>
+	
+
+	<div class="comments">
+		
+
+<button class="show-comments">Load Disqus comments</button>
+
+<div id="disqus_thread"></div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.show-comments').on('click', function(){
+          var disqus_shortname = 'valentinmihov'; // Replace this value with *your* username.
+
+          var d = document, s = d.createElement('script');
+
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+
+          // hide the button once comments load
+          $(this).fadeOut();
+    });
+});
+</script>
+
+
+	</div>
+
+	<div class="post-footer">
+		<div class="column-1">
+			
+				<a href="http://localhost:4000/2015/11/15/microservices-dev-environment-with-docker/"><< Older</a>
+			
+		</div>
+		<div class="column-2"><a href="http://localhost:4000/ ">Home</a></div>
+		<div class="column-3">
+			
+				<span>Newer >></span>
+			
+		</div>
+	</div>
+</div>
+
+        <footer class="main-footer">
+            <div class="wc-container">
+                <div class="column one">
+                    <h6>Few more links</h6>
+<ul class="menu">
+    <li><a href="http://localhost:4000/about">About</a></li>
+    <li><a href="http://localhost:4000/blog">Blog</a></li>
+</ul>		
+
+                </div>
+                <div class="column two">
+                    <h6>Follow me</h6>
+
+<ul class="social-media">
+
+
+    
+    <li>
+        <a title="valentinmihov on Twitter"
+            href="https://twitter.com/valentinmihov"
+            class="twitter wc-img-replace" target="_blank">Twitter</a>
+    </li>
+    
+
+    
+    <li>
+        <a title="valo on Github"
+            href="https://github.com/valo"
+            class="github wc-img-replace" target="_blank">Github</a>
+    </li>
+    
+
+    
+    <li>
+        <a title="valentin.mihov1 on Facebook"
+            href="https://facebook.com/valentin.mihov1"
+            class="facebook wc-img-replace" target="_blank">Facebook</a>
+    </li>
+    
+
+    
+    <li>
+        <a title="+ValentinMihov on Google Plus"
+            href="https://plus.google.com/+ValentinMihov"
+            class="google wc-img-replace" target="_blank">Google</a>
+    </li>
+    
+
+    
+
+    
+
+</ul>
+
+                </div>
+            </div>
+            <p class="wc-container disclaimer">
+                
+	Everything you find here under Creative Commons CC0.         
+
+Powered by <a href="http://jekyllrb.com" target="_blank">Jekyll</a>
+            </p>
+        </footer>
+        <script type="text/javascript">
+          /* To avoid render blocking css */
+          var cb = function() {
+            var l = document.createElement('link'); l.rel = 'stylesheet';
+            l.href = '//fonts.googleapis.com/css?family=Ubuntu+Mono&subset=latin';
+            var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+          };
+          var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+              webkitRequestAnimationFrame || msRequestAnimationFrame;
+          if (raf) raf(cb);
+          else window.addEventListener('load', cb);
+        </script>
+        <!-- jQuery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- When no internet load JQuery from local -->
+        <script>window.jQuery || document.write('<script src="/assets/js/jquery.min.js"><\/script>')</script>
+        <!-- Site js -->
+        <script src="/assets/js/anchor.min.js"></script>
+        <script src="/assets/js/all.js"></script>
+        <!-- Google analytics  -->
+        
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-9529494-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+    </body>
+</html>

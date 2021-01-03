@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+            var host = 'www.valentinmihov.com';
+            if ((host == window.location.host) && (window.location.protocol != "https:"))
+                window.location.protocol = "https";
+        </script>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Rails + EmberJS + Active Model Serializers + Her</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="The personal blog of Valentin Mihov. Mostly technical stuff around software.
+" />
+        <link rel="canonical" href="http://localhost:4000/2015/01/17/rails-plus-emberjs-plus-active-model-serializers-plus-her/" />
+        <meta content="Valentin Mihov's Blog" property="og:site_name">
+
+  <meta content="Rails + EmberJS + Active Model Serializers + Her" property="og:title">
+
+
+  <meta content="article" property="og:type">
+
+
+  <meta content="How to hookup EmberJS and Her ORM to a common Rails API endpoints" property="og:description">
+
+
+  <meta content="http://localhost:4000/2015/01/17/rails-plus-emberjs-plus-active-model-serializers-plus-her/" property="og:url">
+
+
+  <meta content="2015-01-17T20:20:14+02:00" property="article:published_time">
+  <meta content="http://localhost:4000/about/" property="article:author">
+
+
+  <meta content="http://localhost:4000/images/87173a37d2b301a20a55ac042aaf6444.jpg" property="og:image">
+
+
+  
+
+
+  
+  <meta content="rails" property="article:tag">
+  
+  <meta content="emberjs" property="article:tag">
+  
+  <meta content="her" property="article:tag">
+  
+  <meta content="soa" property="article:tag">
+  
+  <meta content="services" property="article:tag">
+  
+  <meta content="json" property="article:tag">
+  
+  <meta content="rails api" property="article:tag">
+  
+  <meta content="api" property="article:tag">
+  
+
+
+        <!-- Harmony styles -->
+        <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/css/anchor.css" />
+
+        <!-- Modernizr js -->
+        <script async src="/assets/js/modernizr.js"></script>
+
+        <!-- IE Fixes -->
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body class="theme-base-01">
+        <header class="main-header">
+            <div class="wc-container">
+                <h1><a href="/">Valentin Mihov's Blog</a></h1>
+                <h2>Random pieces of wisdom about technology</h2>
+                <ul>
+	<li>
+		<a href="http://localhost:4000/about">About</a><span>/</span>
+	</li>
+	<li>
+		<a href="http://localhost:4000/blog">Blog</a><span>/</span>
+	</li>
+	<li>
+		<a title="Valentin Mihov on Github" 
+			href="https://github.com/valo" target="_blank">
+			Github
+		</a><span>/</span>
+	</li>
+</ul>
+
+            </div>
+        </header>
+        <div class="page-content wc-container">
+
+	<div class="post">
+		
+		<h1>Rails + EmberJS + Active Model Serializers + Her</h1>
+		<p class="post-meta">
+			
+	    <span class="post-date">
+    	Jan 17, 2015
+	    </span>
+		</p>
+		<div class="post">
+			<p>Recently I got into a situation at work, where there was a Rails app, which was exposing some data through an API which uses <a href="https://github.com/rails-api/active_model_serializers">active_record_serializers</a> and <a href="http://emberjs.com/">EmberJS</a> as front-end of the data. The problem was there needed to be a new Rails app, which also consumes data from the same Rails API endpoints and visualize the data. Unfortunatelly <a href="https://github.com/rails/activeresource">ActiveResource</a> and <a href="https://github.com/remiprev/her">Her</a> are not supporting the ember-data kind of data format, which requires to have separate serializers for EmberJS and for regular Rails API calls. So the <a href="https://github.com/valo/ember_data_active_model_parser">ember_data_active_model_parser</a> was born, which is a middleware for Her, which makes it understand the ember-data JSON format.</p>
+
+<h2 id="using-emberjs-with-rails">Using EmberJS with Rails</h2>
+
+<p>The standard way to hook up EmberJS with a Rails app is to use the active_record_serializers and the <a href="http://emberjs.com/api/data/classes/DS.ActiveModelAdapter.html">DS.ActiveModelAdapter</a>. This causes the JSON responses to look like this:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// GET /projects/1</span>
+<span class="p">{</span>
+    <span class="s2">"project"</span><span class="err">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Shop list"</span><span class="p">,</span>
+        <span class="s2">"task_ids"</span><span class="err">:</span> <span class="p">[</span>
+            <span class="mi">2</span><span class="p">,</span>
+            <span class="mi">8</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">"tasks"</span><span class="err">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"completed"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Water"</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"completed"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Bread"</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>As you see the nested resources are specified with their ids and then are serialized at the top level of the JSON. Unfortunately this does not work with ActiveResource or Her if you want to consume this from another Rails app.</p>
+
+<p>The above output is done with the following serializers:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">ProjectSerializer</span> <span class="o">&lt;</span> <span class="no">ActiveModel</span><span class="o">::</span><span class="no">Serializer</span>
+  <span class="n">embed</span> <span class="ss">:ids</span><span class="p">,</span> <span class="ss">embed_in_root: </span><span class="kp">true</span>
+
+  <span class="n">attributes</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:name</span>
+
+  <span class="n">has_many</span> <span class="ss">:tasks</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">TaskSerializer</span> <span class="o">&lt;</span> <span class="no">ActiveModel</span><span class="o">::</span><span class="no">Serializer</span>
+  <span class="n">embed</span> <span class="ss">:ids</span><span class="p">,</span> <span class="ss">embed_in_root: </span><span class="kp">true</span>
+
+  <span class="n">attributes</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:completed</span>
+<span class="k">end</span></code></pre></figure>
+
+<h2 id="consuming-using-her-and-a-custom-parser">Consuming using Her and a custom parser</h2>
+
+<p>At this point everything works great, but what about if you want to consume the above REST API from another Rails app? There are several options for an ORM here like <a href="https://github.com/rails/activeresource">ActiveResource</a> and <a href="https://github.com/remiprev/her">Her</a>, but they both don’t understand the above format. Here is what you get using the default Her parsers with the active_model_serializers format:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Her</span><span class="o">::</span><span class="no">API</span><span class="p">.</span><span class="nf">setup</span> <span class="ss">url: </span><span class="s2">"http://localhost:3000"</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">use</span> <span class="no">Faraday</span><span class="o">::</span><span class="no">Request</span><span class="o">::</span><span class="no">UrlEncoded</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">use</span> <span class="no">Her</span><span class="o">::</span><span class="no">Middleware</span><span class="o">::</span><span class="no">DefaultParseJSON</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">use</span> <span class="no">Faraday</span><span class="o">::</span><span class="no">Adapter</span><span class="o">::</span><span class="no">NetHttp</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Project</span>
+  <span class="kp">include</span> <span class="no">Her</span><span class="o">::</span><span class="no">Model</span>
+
+  <span class="n">parse_root_in_json</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">format: :active_model_serializers</span>
+
+  <span class="n">has_many</span> <span class="ss">:tasks</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Task</span>
+  <span class="kp">include</span> <span class="no">Her</span><span class="o">::</span><span class="no">Model</span>
+
+  <span class="n">parse_root_in_json</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">format: :active_model_serializers</span>
+
+  <span class="n">belongs_to</span> <span class="ss">:project</span>
+<span class="k">end</span>
+
+<span class="no">Project</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Project(projects/1) name="Shop list" task_ids=[2, 8] id=1&gt;</span>
+
+<span class="no">Project</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nf">tasks</span>
+<span class="c1"># Exception Her::Errors::ParseError because it tries to access /products/1/tasks</span></code></pre></figure>
+
+<p>Wouldn’t it be nice to be able to consume the above API data together with the relations, just like ember-data does? So I wrote a custom parser for Her, which helps Her resolve the relations: <a href="https://github.com/valo/ember_data_active_model_parser">ember_data_active_model_parser</a>. Include the gem in your Gemfile, replace the default JSON parser and you are good to go:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Her</span><span class="o">::</span><span class="no">API</span><span class="p">.</span><span class="nf">setup</span> <span class="ss">url: </span><span class="s2">"http://localhost:3000"</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">use</span> <span class="no">Faraday</span><span class="o">::</span><span class="no">Request</span><span class="o">::</span><span class="no">UrlEncoded</span>
+
+  <span class="c1"># A custom JSON parser</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">use</span> <span class="no">EmberDataActiveModelParser</span><span class="o">::</span><span class="no">Middleware</span>
+  
+  <span class="n">c</span><span class="p">.</span><span class="nf">use</span> <span class="no">Faraday</span><span class="o">::</span><span class="no">Adapter</span><span class="o">::</span><span class="no">NetHttp</span>
+<span class="k">end</span>
+
+<span class="c1"># Use the same model definitions as the example above</span>
+
+<span class="no">Project</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Project(projects/1) name="Shop list" id=1 tasks=[...]&gt;</span>
+
+<span class="no">Project</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nf">tasks</span>
+<span class="c1"># =&gt; [#&lt;Task(tasks/2) name="Water" completed=true id=2 project=#&lt;Project(projects/1) name="Shop list" ...&gt;&gt;, #&lt;Task(tasks/8) name="Bread" completed=false id=8 project=#&lt;Project(projects/1) name="Shop list" ...&gt;&gt;]</span></code></pre></figure>
+
+<h2 id="example-projects">Example projects</h2>
+
+<p>You can checkout the example projects I setup:</p>
+
+<ul>
+  <li>Rails app with EmberJS front-end: <a href="https://github.com/valo/ember_rails_api_example">ember_rails_api_example</a></li>
+  <li>Rails app which uses Her to consume the data from the first app: <a href="https://github.com/valo/ember_rails_api_consumer">ember_rails_api_consumer</a></li>
+</ul>
+
+<p>This is the first version of the parser, so there is a lot of room for improvement. If you find it useful, please open an issue with any suggestions or bugs you find!</p>
+
+
+			<div class="share-page">
+			    Share this on &rarr;
+			    <a href="https://twitter.com/intent/tweet?text=Rails+%2B+EmberJS+%2B+Active+Model+Serializers+%2B+Her&amp;url=http%3A%2F%2Flocalhost%3A4000%2F2015%2F01%2F17%2Frails-plus-emberjs-plus-active-model-serializers-plus-her%2F&amp;via=valentinmihov&amp;related=valentinmihov" rel="nofollow" target="_blank" title="Share on Twitter">Twitter</a>
+			    <a href="https://facebook.com/sharer.php?u=http://localhost:4000/2015/01/17/rails-plus-emberjs-plus-active-model-serializers-plus-her/" rel="nofollow" target="_blank" title="Share on Facebook">Facebook</a>
+			    <a href="https://plus.google.com/share?url=http://localhost:4000/2015/01/17/rails-plus-emberjs-plus-active-model-serializers-plus-her/" rel="nofollow" target="_blank" title="Share on Google+">Google+</a>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="related">
+		<h4>Related Posts</h2>
+		<ul class="posts">
+		    
+		    <li>
+			  <span>12 Sep 2016 &raquo;</span>
+			  <a href="http://localhost:4000/2016/09/12/fullstackfest-2016-recap/">Full Stack Fest 2016 Recap</a>
+		    </li>
+		    
+		    <li>
+			  <span>15 Nov 2015 &raquo;</span>
+			  <a href="http://localhost:4000/2015/11/15/microservices-dev-environment-with-docker/">Development environment for microservices with docker-compose</a>
+		    </li>
+		    
+		    <li>
+			  <span>24 Apr 2015 &raquo;</span>
+			  <a href="http://localhost:4000/2015/04/24/aws-machine-learning-overview/">AWS Machine Learning Overview</a>
+		    </li>
+		    
+		</ul>
+	</div>
+	
+
+	<div class="comments">
+		
+
+<button class="show-comments">Load Disqus comments</button>
+
+<div id="disqus_thread"></div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.show-comments').on('click', function(){
+          var disqus_shortname = 'valentinmihov'; // Replace this value with *your* username.
+
+          var d = document, s = d.createElement('script');
+
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+
+          // hide the button once comments load
+          $(this).fadeOut();
+    });
+});
+</script>
+
+
+	</div>
+
+	<div class="post-footer">
+		<div class="column-1">
+			
+				<a href="http://localhost:4000/sample-post-with-images"><< Older</a>
+			
+		</div>
+		<div class="column-2"><a href="http://localhost:4000/ ">Home</a></div>
+		<div class="column-3">
+			
+				<a href="http://localhost:4000/2015/01/27/view_vs_feature_specs_what_to_use/">Newer >></a>
+			
+		</div>
+	</div>
+</div>
+
+        <footer class="main-footer">
+            <div class="wc-container">
+                <div class="column one">
+                    <h6>Few more links</h6>
+<ul class="menu">
+    <li><a href="http://localhost:4000/about">About</a></li>
+    <li><a href="http://localhost:4000/blog">Blog</a></li>
+</ul>		
+
+                </div>
+                <div class="column two">
+                    <h6>Follow me</h6>
+
+<ul class="social-media">
+
+
+    
+    <li>
+        <a title="valentinmihov on Twitter"
+            href="https://twitter.com/valentinmihov"
+            class="twitter wc-img-replace" target="_blank">Twitter</a>
+    </li>
+    
+
+    
+    <li>
+        <a title="valo on Github"
+            href="https://github.com/valo"
+            class="github wc-img-replace" target="_blank">Github</a>
+    </li>
+    
+
+    
+    <li>
+        <a title="valentin.mihov1 on Facebook"
+            href="https://facebook.com/valentin.mihov1"
+            class="facebook wc-img-replace" target="_blank">Facebook</a>
+    </li>
+    
+
+    
+    <li>
+        <a title="+ValentinMihov on Google Plus"
+            href="https://plus.google.com/+ValentinMihov"
+            class="google wc-img-replace" target="_blank">Google</a>
+    </li>
+    
+
+    
+
+    
+
+</ul>
+
+                </div>
+            </div>
+            <p class="wc-container disclaimer">
+                
+	Everything you find here under Creative Commons CC0.         
+
+Powered by <a href="http://jekyllrb.com" target="_blank">Jekyll</a>
+            </p>
+        </footer>
+        <script type="text/javascript">
+          /* To avoid render blocking css */
+          var cb = function() {
+            var l = document.createElement('link'); l.rel = 'stylesheet';
+            l.href = '//fonts.googleapis.com/css?family=Ubuntu+Mono&subset=latin';
+            var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+          };
+          var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+              webkitRequestAnimationFrame || msRequestAnimationFrame;
+          if (raf) raf(cb);
+          else window.addEventListener('load', cb);
+        </script>
+        <!-- jQuery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- When no internet load JQuery from local -->
+        <script>window.jQuery || document.write('<script src="/assets/js/jquery.min.js"><\/script>')</script>
+        <!-- Site js -->
+        <script src="/assets/js/anchor.min.js"></script>
+        <script src="/assets/js/all.js"></script>
+        <!-- Google analytics  -->
+        
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-9529494-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+    </body>
+</html>
