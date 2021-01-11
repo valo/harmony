@@ -15,6 +15,6 @@ export default function Logo({ fill }) {
 }
 
 const LogoContainer = styled.div`
-  font-size: 10em;
+  font-size: 3em;
   color: ${p => p.theme.colors.primary};
 `;
