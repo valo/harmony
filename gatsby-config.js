@@ -40,7 +40,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Valentin Mihov Portfolio`,
+        name: `Valentin Mihov - DeFi Investing & Yield Farming`,
         short_name: `Valentin Mihov`,
         start_url: `/`,
         background_color: `#fff`,
