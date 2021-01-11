@@ -10,7 +10,7 @@ Photo by <a href="https://unsplash.com/@micheile?utm_source=unsplash&amp;utm_med
 
 During the summer of 2020 a new trend picked up in the blockchain world: yield farming. The term "yield farming" is used 
 for the activity of looking for opportunities to deploy capital in smart contracts and receive high yield on that capital.
-Example of such opportunities are decentralized lending protocols, like [Compound](https://compound.finance). These protocols allow to deposit funds, that are being lend out and the lenders pay interest on the loans. The interest is paid back to the
+Example of such opportunities are decentralized lending protocols, like [Compound](https://compound.finance). These protocols allow to deposit funds, that are being lend out and the borrowers pay interest on the loans. The interest is paid back to the
 liquidity providers of the protocol. This is similar to being a shareholder in a bank and getting dividends from the revenue
 of the bank. The main difference is that the bank will be keeping a large margin on the revenue, while in the DeFi world most of the revenue is paid out to the liquidity providers.
 

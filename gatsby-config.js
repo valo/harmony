@@ -47,6 +47,7 @@ module.exports = {
         theme_color: `#fff`,
         display: `standalone`,
         icon: `src/assets/favicon.png`,
+        lang: `en`,
       },
     },
     {
@@ -75,6 +76,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-twitter`,
-    `gatsby-plugin-catch-links`
+    `gatsby-plugin-catch-links`,
+    `gatsby-plugin-offline`
   ],
 };

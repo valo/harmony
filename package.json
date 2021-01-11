@@ -16,6 +16,7 @@
     "gatsby-plugin-catch-links": "^2.7.0",
     "gatsby-plugin-manifest": "^2.2.4",
     "gatsby-plugin-netlify-cms": "^4.1.40",
+    "gatsby-plugin-offline": "^3.7.1",
     "gatsby-plugin-twitter": "^2.7.0",
     "gatsby-remark-embedder": "^4.1.0",
     "netlify-cms-app": "^2.11.23",
