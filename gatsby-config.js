@@ -3,7 +3,7 @@ module.exports = {
     title: `Valentin Mihov - DeFi Investing & Yield Farming`,
     name: `Valentin Mihov`,
     siteUrl: `https://valentinmihov.com`,
-    description: `Software engineering and decentralized finance consulting. 15+ years of experience in algorithms and data structures. DeFi investor.`,
+    description: `Software engineering, decentralized finance, yield farming. 15+ years of experience in algorithms and data structures.`,
     hero: {
       heading: `20+ years computer science. <a href="https://en.wikipedia.org/wiki/Decentralized_finance" target="_blank">DeFi</a> investing & yield optimization.`,
       maxWidth: 652,
