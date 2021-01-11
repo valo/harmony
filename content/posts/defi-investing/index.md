@@ -37,7 +37,7 @@ The topic of smart contract security is broad and I have written another article
 
 ## Protocol level yield
 
-Something which is important to understand about the protocol you are providing money in, is how is that protocol is generating revenue. For example [Uniswap](https://uniswap.exchange) is a decentralized exchange, which is charging 0.3% on each trade that happens through it. If you provide liquidity in this protocol, you will be earning your share of the collected fees. In this particular case it is important to identify the trading pairs, which generate the most amount of volume and compare that to the liquidity of the pair. The pairs with the best volume/liquidity ratio are giving the best yield.
+Something which is important to understand about a DeFi protocol, is how that protocol is generating revenue. For example [Uniswap](https://uniswap.exchange) is a decentralized exchange, which is charging 0.3% on each trade done on it. If you provide liquidity in this protocol, you will be earning your share of the collected fees. In this particular case it is important to identify the trading pairs, which generate the most amount of volume and compare that to the liquidity of the pair. The pairs with the best volume/liquidity ratio are giving the best yield.
 
 If a given protocol is not generating revenue, this is a red flag that may be the protocol is a scam or won't last long as 
 it won't be able to sustain itself.
@@ -70,9 +70,9 @@ Imagine the current price of $BAT is $1 and you deposit $1000. In one year your 
 
 There are a couple of ways to mitigate the above price risk:
 
-* Try not to buy tokens in order to farm. Buying the tokens exposes you 100% of their price risk
+* Try not to buy tokens in order to farm. Buying the tokens exposes you 100% to their price risk
 * If you able to borrow the tokens, try to do that. Be cautious about the interest of your loan as it decreases the total APR you are earning
-* If you buy the tokens, try to hedge them by making a short position against them. This is usually possible on centralized exchange only
+* If you buy the tokens, try to hedge them by making a short position against them. This is usually only possible on a centralized exchange
 
 ## Gas costs
 
@@ -84,7 +84,7 @@ The gas costs are also connected with what exactly you do with the rewards, afte
 
 ## Conclusion
 
-Yield farming as evolved a lot in 2020. Personally I was not expecting the yield opportunities to continue for so long, but it looks like there are more and more DeFi projects being rolled out. All of these projects are competing for liquidity and in many cases offering rewards for the people willing to put their funds in them. As you navigate the universe of opportunities, don't forget to keep in mind the above points. Try to be level headed about the levels of risk you are taking. Keep in mind that many of these opportunities are zero-sum games, so if someone is winning, someone else is losing money. The correct balance between risk and reward are going to make you successful.
+Yield farming has evolved a lot in 2020. Personally I was not expecting the yield opportunities to continue for so long, but it looks like there are more and more DeFi projects being rolled out. All of these projects are competing for liquidity and in many cases offering rewards for the people willing to put their funds in them. As you navigate the universe of opportunities, don't forget to keep in mind the above points. Try to be level headed about the levels of risk you are taking. Keep in mind that many of these opportunities are zero-sum games, so if someone is winning, someone else is losing money. The correct balance between risk and reward are going to make you successful.
 
 If you have questions you can contract me on twitter: https://twitter.com/valentinmihov
 
