@@ -45,7 +45,7 @@ If a given protocol is not generating revenue, this is a red flag and perhaps th
 ## Subsidized yield
 
 Many times, when a new protocol launches it needs to attract liquidity. In order to do that, the developers of the protocol
-incentivize the liquidity providers to put their money in the protocol and give them back some a governance token. The
+incentivize the liquidity providers to put their money in the protocol and give them back a governance token. The
 developers make sure there is a market for the new token so that the rewards can be cashed out. By making this subsidy,
 the protocol is able to bootstrap its liquidity and it is usually a nice opportunity to earn extra yield on your funds.
 
