@@ -79,7 +79,7 @@ There are a couple of ways to mitigate the above price risk:
 
 When you invest into a given opportunity, the next question is: how often to claim the rewards and what to do with them. The frequency of claiming the rewards is determined by the gas costs of claiming them. Each transaction on the Ethereum blockchain costs money and in cases of high congestion these "taxes" are quite high. I usually recommend not to spend more than 5-10% of the claimed rewards in gas costs. That means that if the transaction cost for claiming the rewards, selling them and reinvesting is $10 in gas costs, the size of the claimed rewards should be at least $100-200 in order for it to be worthwhile.
 
-The above rule will yield determine the frequency of claiming rewards. If you have a large position with a high yield you might be able to claim the rewards several times a day. On the other hand if your position is small it might be better to do the claim once every 2-3 days.
+The above rule will determine the frequency of claiming rewards. If you have a large position with a high yield you might be able to claim the rewards several times a day. On the other hand if your position is small it might be better to do the claim once every 2-3 days.
 
 The gas costs are also connected with what exactly you do with the rewards after you claim them. One very simple strategy is to sell them for some stablecoin like $USDC. Another is to buy more of the token you farm with and stake them into the farm. A third option is to convert them to $ETH. The decision on what to do with the farmed rewards is determined by your investment thesis and your general strategy.
 
