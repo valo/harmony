@@ -6,22 +6,22 @@ module.exports = {
     description: `Software engineering, decentralized finance, yield farming. 15+ years of experience in algorithms and data structures.`,
     hero: {
       heading: `20+ years computer science. <a href="https://en.wikipedia.org/wiki/Decentralized_finance" target="_blank">DeFi</a> investing & yield optimization.`,
-      maxWidth: 652,
+      maxWidth: 652
     },
     social: [
       {
         name: `twitter`,
-        url: `https://twitter.com/valentinmihov`,
+        url: `https://twitter.com/valentinmihov`
       },
       {
         name: `github`,
-        url: `https://github.com/valo`,
+        url: `https://github.com/valo`
       },
       {
         name: `linkedin`,
-        url: `https://www.linkedin.com/in/valentinmihov/`,
-      },
-    ],
+        url: `https://www.linkedin.com/in/valentinmihov/`
+      }
+    ]
   },
   plugins: [
     {
@@ -32,10 +32,10 @@ module.exports = {
         basePath: "/",
         authorsPage: true,
         sources: {
-          local: true,
+          local: true
           // contentful: true,
-        },
-      },
+        }
+      }
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -47,13 +47,12 @@ module.exports = {
         theme_color: `#fff`,
         display: `standalone`,
         icon: `src/assets/favicon.png`,
-        lang: `en`,
-      },
+        lang: `en`
+      }
     },
     {
       resolve: `gatsby-plugin-netlify-cms`,
-      options: {
-      },
+      options: {}
     },
     {
       resolve: `gatsby-plugin-mdx`,
@@ -67,16 +66,16 @@ module.exports = {
               ],
               services: {
                 // The service-specific options by the name of the service
-              },
-            },
-          },
+              }
+            }
+          }
 
           // Other plugins here...
-        ],
-      },
+        ]
+      }
     },
     `gatsby-plugin-twitter`,
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-offline`
-  ],
+  ]
 };

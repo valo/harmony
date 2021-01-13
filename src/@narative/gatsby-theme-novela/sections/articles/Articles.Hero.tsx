@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import styled from '@emotion/styled';
+import React, { useContext } from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import styled from "@emotion/styled";
 
-import Section from '@components/Section';
-import Bio from '@components/Bio';
-import Icons from '@icons';
-import mediaqueries from '@styles/media';
-import { IAuthor } from '@types';
+import Section from "@components/Section";
+import Bio from "@components/Bio";
+import Icons from "@icons";
+import mediaqueries from "@styles/media";
+import { IAuthor } from "@types";
 import SocialLinks from "@components/SocialLinks";
 
-import { GridLayoutContext } from '@narative/gatsby-theme-novela/src/sections/articles/Articles.List.Context';
+import { GridLayoutContext } from "@narative/gatsby-theme-novela/src/sections/articles/Articles.List.Context";
 
 const authorQuery = graphql`
   {
@@ -29,13 +29,13 @@ const authorQuery = graphql`
 `;
 
 const ArticlesHero: React.FC<IAuthor> = ({ authors }) => {
-  const { gridLayout = 'tiles', hasSetGridLayout, setGridLayout } = useContext(
-    GridLayoutContext,
+  const { gridLayout = "tiles", hasSetGridLayout, setGridLayout } = useContext(
+    GridLayoutContext
   );
 
   const results = useStaticQuery(authorQuery);
   const hero = results.site.edges[0].node.siteMetadata.hero;
-  const tilesIsActive = hasSetGridLayout && gridLayout === 'tiles';
+  const tilesIsActive = hasSetGridLayout && gridLayout === "tiles";
   const featuredAuthor = authors.find(author => author.featured);
 
   if (!featuredAuthor) {
@@ -59,7 +59,7 @@ const ArticlesHero: React.FC<IAuthor> = ({ authors }) => {
         </FeaturedAuthor>
         <GridControlsContainer>
           <GridButton
-            onClick={() => setGridLayout('tiles')}
+            onClick={() => setGridLayout("tiles")}
             active={tilesIsActive}
             data-a11y="false"
             title="Show articles in Tile grid"
@@ -68,7 +68,7 @@ const ArticlesHero: React.FC<IAuthor> = ({ authors }) => {
             <Icons.Tiles />
           </GridButton>
           <GridButton
-            onClick={() => setGridLayout('rows')}
+            onClick={() => setGridLayout("rows")}
             active={!tilesIsActive}
             data-a11y="false"
             title="Show articles in Row grid"
@@ -169,8 +169,8 @@ const GridButton = styled.button<{ active: boolean }>`
     background: ${p => p.theme.colors.hover};
   }
 
-  &[data-a11y='true']:focus::after {
-    content: '';
+  &[data-a11y="true"]:focus::after {
+    content: "";
     position: absolute;
     left: -10%;
     top: -10%;
@@ -200,7 +200,6 @@ const Social = styled.div`
     font-size: 14px;
   `}
 `;
-
 
 const FeaturedAuthor = styled.div`
   display: flex;

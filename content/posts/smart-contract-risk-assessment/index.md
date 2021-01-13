@@ -8,16 +8,15 @@ excerpt: One of the most important aspects of DeFi investing and yield farming i
 
 Photo credit: <a href="https://unsplash.com/@charlesdeluvio?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Charles Deluvio</a> on <a href="https://unsplash.com/s/photos/code-review?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a>
 
-
 One of the most important aspects of DeFi investing and yield farming is the risk assessment of the smart contract where the funds are being put. During 2020 there were multiple hacks, which exploited vulnerabilities in the DeFi protocols, leading to millions of dollars lost by the depositors. I've been involved in smart contract risk assessment since the DeFi craze started. Before that I was a CTO in the blockchain analytics company [Santiment Network](https://santiment.net/). The time at Santiment helped me dive into a lot of Ethereum smart contract code and gain experience in analyzing and understanding the emerging DeFi protocols.
 
 There are two main smart contract risks which DeFi investors should be looking for: scams (a.k.a. "rug pulls") and bugs/vulnerabilities. Let's first dive into the easier one: scams.
 
 ## Scams
 
-As the DeFi ecosystem is growing exponentially, the amount of scammers trying to profit quickly increases. The scams have different form and approach to stealing money. In many cases the scammers fork an existing popular DeFi protocol and market it as a new alternative. They offer tempting rewards for everyone that deposit in the protocol in the form of crazy returns, usually reaching to values like 10000% annually. The rewards are usually paid in form of a new governance token, which is created by the scammers. The key differentiation here is that the scammers modify the source code of the forked protocol and include some kind of mechanism which allows them to drain the deposited funds in an address that they control. The so called "rug pull" mechanism is either a function, which a privileged address can call or a lack of a timelock protection of an important privileged mechanism. 
+As the DeFi ecosystem is growing exponentially, the amount of scammers trying to profit quickly increases. The scams have different form and approach to stealing money. In many cases the scammers fork an existing popular DeFi protocol and market it as a new alternative. They offer tempting rewards for everyone that deposit in the protocol in the form of crazy returns, usually reaching to values like 10000% annually. The rewards are usually paid in form of a new governance token, which is created by the scammers. The key differentiation here is that the scammers modify the source code of the forked protocol and include some kind of mechanism which allows them to drain the deposited funds in an address that they control. The so called "rug pull" mechanism is either a function, which a privileged address can call or a lack of a timelock protection of an important privileged mechanism.
 
-Usually these protocols does not attract a lot of funds in them, as the backdoors are obvious for the experienced security experts. The amount of funds being stolen in such a scam is usually under $500,000, which is smaller compared to vulnerability exploits or centralized exchange hacks, but still they are very painful for the victims. Especially when they are easily preventable if you have an expert you can ask about the safety of a given protocol.
+Usually these protocols does not attract a lot of funds in them, as the backdoors are obvious for the experienced security experts. The amount of funds being stolen in such a scam is usually under \$500,000, which is smaller compared to vulnerability exploits or centralized exchange hacks, but still they are very painful for the victims. Especially when they are easily preventable if you have an expert you can ask about the safety of a given protocol.
 
 https://twitter.com/valentinmihov/status/1330478266252144640
 
@@ -45,9 +44,9 @@ Although the vulnerability is well known it is not always easy to detect it when
 
 In order to mitigate risk against such bugs it's very important to make a good assessment of the complexity of the new protocols. Things to look for:
 
-* leveraged positions
-* pricing complex tokens, like baskets of stables
-* plug-able architectures that allow forwarding the deposited funds around different places (a.k.a. vaults)
+- leveraged positions
+- pricing complex tokens, like baskets of stables
+- plug-able architectures that allow forwarding the deposited funds around different places (a.k.a. vaults)
 
 The safer protocols are the ones that has been around longer, like yEarn Vaults, Uniswap, Aave, Compound. Keep in mind that even in these cases, there are problems popping up. For example Aave saw a security problem being disclosed after many months of operating.
 
